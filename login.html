@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | HassanFX</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: #041020;
+  color: white;
+}
+
+header {
+  padding: 22px 6%;
+  border-bottom: 1px solid #17334f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #00d990;
+}
+
+header a, .signup-link {
+  color: #13a4ff;
+  text-decoration: none;
+}
+
+header a {
+  border: 1px solid #078dff;
+  border-radius: 8px;
+  padding: 11px 18px;
+}
+
+main {
+  padding: 55px 16px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 28px;
+  animation: enter 1s ease both;
+}
+
+.heading h1 {
+  font-size: clamp(32px, 6vw, 46px);
+  margin-bottom: 14px;
+}
+
+.heading h1 span {
+  display: inline-block;
+  background: linear-gradient(
+    90deg, #00d990, #00cfff, #00ff9d
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: flow 4s linear infinite, float 3s ease-in-out infinite;
+}
+
+.heading p {
+  color: #9fb5d3;
+  line-height: 1.7;
+}
+
+.card {
+  max-width: 480px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #23466c;
+  border-radius: 18px;
+  background: #091a30;
+  box-shadow: 0 15px 50px #0005;
+  animation: enter 1.2s ease both;
+}
+
+.field {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 9px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 9px;
+  border: 1px solid #355271;
+  background: #061326;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #00d990;
+  box-shadow: 0 0 0 2px #00d99022;
+}
+
+input::placeholder {
+  color: #8398b4;
+}
+
+button {
+  cursor: pointer;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00c979, #00e69b);
+  color: #031b17;
+  font-size: 17px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px #00d99035;
+}
+
+.message {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.signup-link {
+  display: block;
+  text-align: center;
+  margin-top: 22px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  color: #829ab8;
+  font-size: 13px;
+}
+
+@keyframes enter {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flow {
+  from { background-position: 0% center; }
+  to { background-position: 200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (max-width: 480px) {
+  header { padding: 18px; }
+  .logo { font-size: 23px; }
+  .card { padding: 22px 18px; }
+  main { padding: 38px 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Hassan<span>FX</span></div>
+  <a href="signup.html">Sign Up</a>
+</header>
+
+<main>
+  <div class="heading">
+    <h1>Welcome <span>Back</span></h1>
+    <p>Log in to your HassanFX account.</p>
+  </div>
+
+  <form class="card" id="loginForm">
+    <div class="field">
+      <label for="email">Email Address</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+        required>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+        required>
+    </div>
+
+    <button class="login-btn" type="submit">
+      LOGIN →
+    </button>
+
+    <p class="message" id="message" role="status"
+       aria-live="polite"></p>
+
+    <a href="signup.html" class="signup-link">
+      Don't have an account? Create one
+    </a>
+  </form>
+</main>
+
+<footer>
+  © 2026 HassanFX. All rights reserved.
+</footer>
+
+<script>
+document.getElementById("loginForm").addEventListener(
+  "submit", function(event) {
+    event.preventDefault();
+
+    document.getElementById("message").style.color = "#ffbf69";
+    document.getElementById("message").textContent =
+      "Login page ready. A secure authentication backend is needed to verify your account.";
+  }
+);
+</script>
+
+</body>
+</html>
