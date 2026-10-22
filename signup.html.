@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Create Account | HassanFX</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #041020;
+  color: #fff;
+  min-height: 100vh;
+}
+
+header {
+  padding: 22px 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #17334f;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #00d990;
+}
+
+.login {
+  color: #13a4ff;
+  text-decoration: none;
+  border: 1px solid #078dff;
+  padding: 11px 20px;
+  border-radius: 8px;
+  transition: .3s;
+}
+
+.login:hover {
+  background: #078dff;
+  color: white;
+}
+
+main {
+  width: 100%;
+  padding: 45px 16px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.heading h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  animation: titleEnter 1.2s ease-out both;
+}
+
+.heading h1 span {
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    #00d990,
+    #00cfff,
+    #00ff9d,
+    #00d990
+  );
+  background-size: 300% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation:
+    colorFlow 4s linear infinite,
+    floatText 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px #00d99055);
+}
+
+.heading p {
+  color: #9fb5d3;
+  line-height: 1.7;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 540px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #23466c;
+  border-radius: 18px;
+  background: #091a30;
+  box-shadow: 0 15px 50px #0005;
+  animation: cardEnter 1s ease-out both;
+}
+
+.field {
+  margin-bottom: 22px;
+}
+
+label {
+  display: block;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 9px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  color: white;
+  background: #061326;
+  border: 1px solid #355271;
+  border-radius: 9px;
+  outline: none;
+  font-size: 15px;
+  transition: border-color .3s, box-shadow .3s;
+}
+
+input:focus {
+  border-color: #00d990;
+  box-shadow: 0 0 0 2px #00d99022;
+}
+
+input::placeholder {
+  color: #8398b4;
+}
+
+.password-input {
+  padding-right: 55px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  padding: 5px;
+  background: transparent;
+  color: #8da5c5;
+  font-size: 12px;
+}
+
+.toggle-password:hover {
+  color: #00d990;
+}
+
+.hint {
+  color: #8da5c5;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+button.continue {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #00c979, #00e69b);
+  color: #031b17;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .3s;
+}
+
+button.continue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px #00d99035;
+}
+
+button.continue:active {
+  transform: scale(.98);
+}
+
+button.continue:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.message {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.terms {
+  margin-top: 20px;
+  text-align: center;
+  color: #9fb5d3;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.terms a {
+  color: #13a4ff;
+}
+
+footer {
+  padding: 25px 15px;
+  text-align: center;
+  color: #829ab8;
+  font-size: 13px;
+}
+
+@keyframes titleEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-35px) scale(.92);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes colorFlow {
+  from { background-position: 0% center; }
+  to { background-position: 300% center; }
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 18px;
+  }
+
+  .logo {
+    font-size: 23px;
+  }
+
+  main {
+    padding: 35px 15px;
+  }
+
+  .form-card {
+    padding: 22px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Hassan<span>FX</span></div>
+  <a class="login" href="login.html">Log In</a>
+</header>
+
+<main>
+
+  <div class="heading">
+    <h1>Create Your <span>Account</span></h1>
+    <p>Join HassanFX and start your trading journey.</p>
+    <p>It only takes a few minutes.</p>
+  </div>
+
+  <form class="form-card" id="signupForm">
+
+    <div class="field">
+      <label for="fullName">Full Name</label>
+      <input
+        id="fullName"
+        name="fullName"
+        type="text"
+        placeholder="Enter your full name"
+        autocomplete="name"
+        required
+        minlength="2">
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        placeholder="Enter your email address"
+        autocomplete="email"
+        required>
+    </div>
+
+    <div class="field">
+      <label for="phone">Phone Number</label>
+      <input
+        id="phone"
+        name="phone"
+        type="tel"
+        placeholder="e.g. +254712345678"
+        autocomplete="tel"
+        required>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+
+      <div class="input-wrap">
+        <input
+          class="password-input"
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Create a password"
+          autocomplete="new-password"
+          minlength="4"
+          required>
+
+        <button
+          type="button"
+          class="toggle-password"
+          data-target="password">
+          Show
+        </button>
+      </div>
+
+      <p class="hint">
+        Password must be at least 4 characters.
+      </p>
+    </div>
+
+    <div class="field">
+      <label for="confirmPassword">Confirm Password</label>
+
+      <div class="input-wrap">
+        <input
+          class="password-input"
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Confirm your password"
+          autocomplete="new-password"
+          required>
+
+        <button
+          type="button"
+          class="toggle-password"
+          data-target="confirmPassword">
+          Show
+        </button>
+      </div>
+    </div>
+
+    <button type="submit" class="continue" id="continueBtn">
+      CONTINUE →
+    </button>
+
+    <p class="message" id="message" role="status"
+       aria-live="polite"></p>
+
+    <p class="terms">
+      By creating an account, you agree to our
+      <a href="terms.html">Terms and Conditions</a>
+      and <a href="privacy.html">Privacy Policy</a>.
+    </p>
+
+  </form>
+
+</main>
+
+<footer>
+  © 2026 HassanFX. All rights reserved.
+</footer>
+
+<script>
+const form = document.getElementById("signupForm");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const message = document.getElementById("message");
+
+function checkPasswords() {
+  if (
+    confirmPassword.value !== "" &&
+    confirmPassword.value !== password.value
+  ) {
+    confirmPassword.setCustomValidity(
+      "Passwords do not match."
+    );
+  } else {
+    confirmPassword.setCustomValidity("");
+  }
+}
+
+password.addEventListener("input", checkPasswords);
+confirmPassword.addEventListener("input", checkPasswords);
+
+// Show or hide passwords
+document.querySelectorAll(".toggle-password").forEach(button => {
+  button.addEventListener("click", () => {
+    const input = document.getElementById(button.dataset.target);
+
+    if (input.type === "password") {
+      input.type = "text";
+      button.textContent = "Hide";
+    } else {
+      input.type = "password";
+      button.textContent = "Show";
+    }
+  });
+});
+
+// Validate registration form
+form.addEventListener("submit", event => {
+  event.preventDefault();
+
+  message.style.color = "#ff8b8b";
+  message.textContent = "";
+
+  checkPasswords();
+
+  if (!form.reportValidity()) {
+    return;
+  }
+
+  message.style.color = "#00d990";
+  message.textContent =
+    "Your details are valid! Connect a secure backend to create your account.";
+});
+</script>
+
+</body>
+</html>
