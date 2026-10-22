@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Create Account | HassanFX</title>
+<meta name="theme-color" content="#07101e">
+<title>Create Account | Traders Scheem</title>
 
 <style>
 * {
@@ -14,107 +14,94 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background: #041020;
-  color: #fff;
   min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f7f9ff;
+  background:
+    radial-gradient(ellipse at top, #172d50 0%, #07101e 55%, #040914 100%);
 }
 
 header {
-  padding: 22px 6%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #17334f;
+  gap: 12px;
+  padding: 18px 6%;
+  border-bottom: 1px solid #263d59;
 }
 
 .logo {
-  font-size: 27px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 .logo span {
-  color: #00d990;
+  color: #f5c94b;
 }
 
-.login {
-  color: #13a4ff;
+.nav-link {
+  color: #f5c94b;
+  border: 1px solid #b68d29;
+  border-radius: 10px;
+  padding: 12px 18px;
   text-decoration: none;
-  border: 1px solid #078dff;
-  padding: 11px 20px;
-  border-radius: 8px;
-  transition: .3s;
-}
-
-.login:hover {
-  background: #078dff;
-  color: white;
+  font-weight: bold;
 }
 
 main {
-  width: 100%;
-  padding: 45px 16px;
+  padding: 42px 16px;
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 30px;
-  overflow: hidden;
+  margin: 0 auto 28px;
+  animation: enter 1s ease both;
 }
 
 .heading h1 {
-  font-size: clamp(30px, 5vw, 48px);
+  font-size: clamp(30px, 6vw, 46px);
   font-weight: 800;
-  letter-spacing: -1px;
   margin-bottom: 14px;
-  animation: titleEnter 1.2s ease-out both;
 }
 
 .heading h1 span {
   display: inline-block;
   background: linear-gradient(
-    90deg,
-    #00d990,
-    #00cfff,
-    #00ff9d,
-    #00d990
+    90deg, #f5c94b, #fff1a8, #38d5f4, #f5c94b
   );
   background-size: 300% auto;
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  animation:
-    colorFlow 4s linear infinite,
-    floatText 3s ease-in-out infinite;
-  filter: drop-shadow(0 0 10px #00d99055);
+  animation: shine 4s linear infinite, float 3s ease-in-out infinite;
 }
 
 .heading p {
-  color: #9fb5d3;
+  color: #aebed4;
   line-height: 1.7;
 }
 
-.form-card {
-  width: 100%;
-  max-width: 540px;
+.card {
+  max-width: 520px;
   margin: auto;
-  padding: 30px;
-  border: 1px solid #23466c;
+  padding: 28px;
+  border: 1px solid #344c6a;
   border-radius: 18px;
-  background: #091a30;
-  box-shadow: 0 15px 50px #0005;
-  animation: cardEnter 1s ease-out both;
+  background: rgba(8, 20, 38, .94);
+  box-shadow: 0 18px 60px #0006;
+  animation: enter 1.2s ease both;
 }
 
 .field {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 label {
   display: block;
-  font-size: 15px;
   font-weight: bold;
   margin-bottom: 9px;
+  font-size: 14px;
 }
 
 .input-wrap {
@@ -124,127 +111,93 @@ label {
 input {
   width: 100%;
   padding: 15px;
-  color: white;
-  background: #061326;
-  border: 1px solid #355271;
   border-radius: 9px;
-  outline: none;
+  border: 1px solid #3c5575;
+  background: #091629;
+  color: white;
   font-size: 15px;
-  transition: border-color .3s, box-shadow .3s;
-}
-
-input:focus {
-  border-color: #00d990;
-  box-shadow: 0 0 0 2px #00d99022;
+  outline: none;
+  transition: .25s;
 }
 
 input::placeholder {
-  color: #8398b4;
+  color: #8295af;
+}
+
+input:focus {
+  border-color: #38d5f4;
+  box-shadow: 0 0 0 3px #38d5f41b;
 }
 
 .password-input {
-  padding-right: 55px;
+  padding-right: 65px;
 }
 
-.toggle-password {
+.toggle {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   width: auto;
-  padding: 5px;
   background: transparent;
-  color: #8da5c5;
-  font-size: 12px;
-}
-
-.toggle-password:hover {
-  color: #00d990;
+  border: none;
+  color: #38d5f4;
+  cursor: pointer;
+  padding: 6px;
 }
 
 .hint {
-  color: #8da5c5;
+  color: #91a6c1;
   font-size: 12px;
   margin-top: 8px;
 }
 
-button.continue {
+.continue {
   width: 100%;
-  padding: 17px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(90deg, #00c979, #00e69b);
-  color: #031b17;
-  font-weight: bold;
+  padding: 17px;
+  background: linear-gradient(100deg, #e9b936, #ffe17b);
+  color: #171403;
   font-size: 17px;
+  font-weight: 800;
   cursor: pointer;
-  transition: transform .2s, box-shadow .3s;
+  transition: .25s;
 }
 
-button.continue:hover {
+.continue:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px #00d99035;
-}
-
-button.continue:active {
-  transform: scale(.98);
-}
-
-button.continue:disabled {
-  opacity: .65;
-  cursor: wait;
+  box-shadow: 0 8px 24px #f5c94b35;
 }
 
 .message {
-  margin-top: 16px;
-  font-size: 14px;
-  line-height: 1.5;
+  margin-top: 15px;
   text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .terms {
   margin-top: 20px;
   text-align: center;
-  color: #9fb5d3;
+  color: #9eafc7;
   font-size: 12px;
   line-height: 1.8;
 }
 
 .terms a {
-  color: #13a4ff;
+  color: #38d5f4;
 }
 
 footer {
-  padding: 25px 15px;
   text-align: center;
-  color: #829ab8;
-  font-size: 13px;
+  padding: 24px 15px;
+  border-top: 1px solid #1c3048;
+  color: #8295af;
+  font-size: 12px;
 }
 
-@keyframes titleEnter {
-  from {
-    opacity: 0;
-    transform: translateY(-35px) scale(.92);
-    filter: blur(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes colorFlow {
-  from { background-position: 0% center; }
-  to { background-position: 300% center; }
-}
-
-@keyframes floatText {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes cardEnter {
+@keyframes enter {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -255,29 +208,27 @@ footer {
   }
 }
 
+@keyframes shine {
+  from { background-position: 0% center; }
+  to { background-position: 300% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 @media (max-width: 480px) {
-  header {
-    padding: 18px;
-  }
-
-  .logo {
-    font-size: 23px;
-  }
-
-  main {
-    padding: 35px 15px;
-  }
-
-  .form-card {
-    padding: 22px 18px;
-  }
+  header { padding: 16px; }
+  .logo { font-size: 21px; }
+  main { padding: 34px 14px; }
+  .card { padding: 22px 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
 </style>
@@ -286,19 +237,18 @@ footer {
 <body>
 
 <header>
-  <div class="logo">Hassan<span>FX</span></div>
-  <a class="login" href="login.html">Log In</a>
+  <div class="logo">Traders <span>Scheem</span></div>
+  <a class="nav-link" href="login.html">Log In</a>
 </header>
 
 <main>
-
-  <div class="heading">
+  <section class="heading">
     <h1>Create Your <span>Account</span></h1>
-    <p>Join HassanFX and start your trading journey.</p>
+    <p>Join Traders Scheem and start your trading journey.</p>
     <p>It only takes a few minutes.</p>
-  </div>
+  </section>
 
-  <form class="form-card" id="signupForm">
+  <form class="card" id="signupForm">
 
     <div class="field">
       <label for="fullName">Full Name</label>
@@ -308,8 +258,8 @@ footer {
         type="text"
         placeholder="Enter your full name"
         autocomplete="name"
-        required
-        minlength="2">
+        minlength="2"
+        required>
     </div>
 
     <div class="field">
@@ -336,7 +286,6 @@ footer {
 
     <div class="field">
       <label for="password">Password</label>
-
       <div class="input-wrap">
         <input
           class="password-input"
@@ -344,26 +293,17 @@ footer {
           name="password"
           type="password"
           placeholder="Create a password"
-          autocomplete="new-password"
           minlength="4"
+          autocomplete="new-password"
           required>
-
-        <button
-          type="button"
-          class="toggle-password"
-          data-target="password">
-          Show
-        </button>
+        <button class="toggle" type="button"
+          data-target="password">Show</button>
       </div>
-
-      <p class="hint">
-        Password must be at least 4 characters.
-      </p>
+      <p class="hint">Password must be at least 4 characters.</p>
     </div>
 
     <div class="field">
       <label for="confirmPassword">Confirm Password</label>
-
       <div class="input-wrap">
         <input
           class="password-input"
@@ -373,22 +313,17 @@ footer {
           placeholder="Confirm your password"
           autocomplete="new-password"
           required>
-
-        <button
-          type="button"
-          class="toggle-password"
-          data-target="confirmPassword">
-          Show
-        </button>
+        <button class="toggle" type="button"
+          data-target="confirmPassword">Show</button>
       </div>
     </div>
 
-    <button type="submit" class="continue" id="continueBtn">
+    <button class="continue" type="submit">
       CONTINUE →
     </button>
 
-    <p class="message" id="message" role="status"
-       aria-live="polite"></p>
+    <p class="message" id="message"
+       role="status" aria-live="polite"></p>
 
     <p class="terms">
       By creating an account, you agree to our
@@ -397,11 +332,10 @@ footer {
     </p>
 
   </form>
-
 </main>
 
 <footer>
-  © 2026 HassanFX. All rights reserved.
+  © 2026 Traders Scheem. All rights reserved.
 </footer>
 
 <script>
@@ -411,54 +345,41 @@ const confirmPassword = document.getElementById("confirmPassword");
 const message = document.getElementById("message");
 
 function checkPasswords() {
-  if (
+  confirmPassword.setCustomValidity(
     confirmPassword.value !== "" &&
     confirmPassword.value !== password.value
-  ) {
-    confirmPassword.setCustomValidity(
-      "Passwords do not match."
-    );
-  } else {
-    confirmPassword.setCustomValidity("");
-  }
+      ? "Passwords do not match."
+      : ""
+  );
 }
 
 password.addEventListener("input", checkPasswords);
 confirmPassword.addEventListener("input", checkPasswords);
 
-// Show or hide passwords
-document.querySelectorAll(".toggle-password").forEach(button => {
+document.querySelectorAll(".toggle").forEach(button => {
   button.addEventListener("click", () => {
     const input = document.getElementById(button.dataset.target);
+    const show = input.type === "password";
 
-    if (input.type === "password") {
-      input.type = "text";
-      button.textContent = "Hide";
-    } else {
-      input.type = "password";
-      button.textContent = "Show";
-    }
+    input.type = show ? "text" : "password";
+    button.textContent = show ? "Hide" : "Show";
   });
 });
 
-// Validate registration form
 form.addEventListener("submit", event => {
   event.preventDefault();
+  checkPasswords();
 
   message.style.color = "#ff8b8b";
   message.textContent = "";
 
-  checkPasswords();
+  if (!form.reportValidity()) return;
 
-  if (!form.reportValidity()) {
-    return;
-  }
-
-  message.style.color = "#00d990";
+  message.style.color = "#f5c94b";
   message.textContent =
-    "Your details are valid! Connect a secure backend to create your account.";
+    "Your details are valid. Account creation requires a secure registration backend.";
 });
 </script>
 
 </body>
-</html>
+</html> 
