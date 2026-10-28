@@ -20,7 +20,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 18px;
-  overflow: hidden;
+  overflow-x: hidden;
   font-family: Arial, Helvetica, sans-serif;
   color: #fff;
   background:
@@ -48,7 +48,6 @@ body {
   position: relative;
   z-index: 1;
   text-align: center;
-  overflow: hidden;
   border: 1px solid #29394a;
   border-radius: 30px;
   background: linear-gradient(145deg,
@@ -431,6 +430,7 @@ body {
 <div class="stars"></div>
 
 <main class="terminal-card">
+
   <div class="orbit-container">
     <div class="orbit"></div>
     <div class="orbit-inner"></div>
@@ -468,36 +468,46 @@ body {
   </div>
 
   <div class="features-grid">
+
     <div class="feature-item">
-      <div class="feature-icon">♧</div>
+      <div class="feature-icon">📊</div>
       <div class="feature-label">Market Analytics</div>
     </div>
 
     <div class="feature-item">
-      <div class="feature-icon">♙</div>
+      <div class="feature-icon">🤖</div>
       <div class="feature-label">Automated Execution</div>
     </div>
 
     <div class="feature-item">
-      <div class="feature-icon">▣</div>
+      <div class="feature-icon">⚡</div>
       <div class="feature-label">Copy Trading</div>
     </div>
+
   </div>
 
   <div class="footer-note">
     Live pricing · Secure login · Synthetic markets 24/7
   </div>
+
 </main>
 
 <script>
 (() => {
-  const progressFill = document.getElementById("progressFill");
-  const progressPercent = document.getElementById("progressPercent");
-  const statusText = document.getElementById("statusText");
-  const spinner = document.getElementById("spinner");
+  const progressFill =
+    document.getElementById("progressFill");
 
-  // Change this to your actual login page filename.
-  const LOGIN_PAGE = "index.html";
+  const progressPercent =
+    document.getElementById("progressPercent");
+
+  const statusText =
+    document.getElementById("statusText");
+
+  const spinner =
+    document.getElementById("spinner");
+
+  // Redirect to your trading dashboard.
+  const DASHBOARD_PAGE = "trade.html";
 
   const messages = [
     { progress: 0, text: "Connecting to markets..." },
@@ -508,15 +518,46 @@ body {
   ];
 
   let progress = 0;
+
+  // Loading animation lasts approximately 3.5 seconds.
   const duration = 3500;
   const intervalTime = 35;
   const increment = 100 / (duration / intervalTime);
 
   const timer = setInterval(() => {
+
     progress = Math.min(100, progress + increment);
 
     progressFill.style.width = progress + "%";
-    progressPercent.textContent = Math.floor(progress) + "%";
+    progressPercent.textContent =
+      Math.floor(progress) + "%";
+
+    for (let i = messages.length - 1; i >= 0; i--) {
+      if (progress >= messages[i].progress) {
+        statusText.textContent = messages[i].text;
+        break;
+      }
+    }
+
+    if (progress >= 100) {
+      clearInterval(timer);
+
+      statusText.textContent =
+        "Ready! Opening dashboard...";
+
+      spinner.style.display = "none";
+
+      setTimeout(() => {
+        window.location.href = DASHBOARD_PAGE;
+      }, 500);
+    }
+
+  }, intervalTime);
+})();
+</script>
+
+</body>
+  </html>
 
     for (let i = messages.length - 1; i >= 0; i--) {
       if (progress >= messages[i].progress) {
