@@ -56,7 +56,6 @@ main {
 .heading {
   text-align: center;
   margin: 0 auto 28px;
-  animation: enter 1s ease both;
 }
 
 .heading h1 {
@@ -66,15 +65,7 @@ main {
 }
 
 .heading h1 span {
-  display: inline-block;
-  background: linear-gradient(
-    90deg, #f5c94b, #fff1a8, #38d5f4, #f5c94b
-  );
-  background-size: 300% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: shine 4s linear infinite, float 3s ease-in-out infinite;
+  color: #f5c94b;
 }
 
 .heading p {
@@ -90,7 +81,6 @@ main {
   border-radius: 18px;
   background: rgba(8, 20, 38, .94);
   box-shadow: 0 18px 60px #0006;
-  animation: enter 1.2s ease both;
 }
 
 .field {
@@ -117,11 +107,6 @@ input {
   color: white;
   font-size: 15px;
   outline: none;
-  transition: .25s;
-}
-
-input::placeholder {
-  color: #8295af;
 }
 
 input:focus {
@@ -138,7 +123,6 @@ input:focus {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  width: auto;
   background: transparent;
   border: none;
   color: #38d5f4;
@@ -162,12 +146,6 @@ input:focus {
   font-size: 17px;
   font-weight: 800;
   cursor: pointer;
-  transition: .25s;
-}
-
-.continue:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px #f5c94b35;
 }
 
 .message {
@@ -196,41 +174,6 @@ footer {
   color: #8295af;
   font-size: 12px;
 }
-
-@keyframes enter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shine {
-  from { background-position: 0% center; }
-  to { background-position: 300% center; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@media (max-width: 480px) {
-  header { padding: 16px; }
-  .logo { font-size: 21px; }
-  main { padding: 34px 14px; }
-  .card { padding: 22px 18px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
 </style>
 </head>
 
@@ -249,55 +192,26 @@ footer {
   </section>
 
   <form class="card" id="signupForm">
-
     <div class="field">
       <label for="fullName">Full Name</label>
-      <input
-        id="fullName"
-        name="fullName"
-        type="text"
-        placeholder="Enter your full name"
-        autocomplete="name"
-        minlength="2"
-        required>
+      <input id="fullName" type="text" placeholder="Enter your full name" required>
     </div>
 
     <div class="field">
       <label for="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="Enter your email address"
-        autocomplete="email"
-        required>
+      <input id="email" type="email" placeholder="Enter your email address" required>
     </div>
 
     <div class="field">
       <label for="phone">Phone Number</label>
-      <input
-        id="phone"
-        name="phone"
-        type="tel"
-        placeholder="e.g. +254712345678"
-        autocomplete="tel"
-        required>
+      <input id="phone" type="tel" placeholder="e.g. +254712345678" required>
     </div>
 
     <div class="field">
       <label for="password">Password</label>
       <div class="input-wrap">
-        <input
-          class="password-input"
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Create a password"
-          minlength="4"
-          autocomplete="new-password"
-          required>
-        <button class="toggle" type="button"
-          data-target="password">Show</button>
+        <input class="password-input" id="password" type="password" placeholder="Create a password" minlength="4" required>
+        <button class="toggle" type="button" data-target="password">Show</button>
       </div>
       <p class="hint">Password must be at least 4 characters.</p>
     </div>
@@ -305,31 +219,18 @@ footer {
     <div class="field">
       <label for="confirmPassword">Confirm Password</label>
       <div class="input-wrap">
-        <input
-          class="password-input"
-          id="confirmPassword"
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm your password"
-          autocomplete="new-password"
-          required>
-        <button class="toggle" type="button"
-          data-target="confirmPassword">Show</button>
+        <input class="password-input" id="confirmPassword" type="password" placeholder="Confirm your password" required>
+        <button class="toggle" type="button" data-target="confirmPassword">Show</button>
       </div>
     </div>
 
-    <button class="continue" type="submit">
-      CONTINUE →
-    </button>
+    <button class="continue" type="submit">CONTINUE →</button>
 
     <p class="message" id="message" role="status" aria-live="polite"></p>
 
     <p class="terms">
-      By creating an account, you agree to our
-      <a href="terms.html">Terms and Conditions</a>
-      and <a href="privacy.html">Privacy Policy</a>.
+      By creating an account, you agree to our <a href="terms.html">Terms and Conditions</a> and <a href="privacy.html">Privacy Policy</a>.
     </p>
-
   </form>
 </main>
 
@@ -337,55 +238,77 @@ footer {
   © 2026 Traders Scheem. All rights reserved.
 </footer>
 
+<!-- Load Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-const form = document.getElementById("signupForm");
-const password = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
-const message = document.getElementById("message");
+  // Your exact Supabase URL & publishable key
+  const SUPABASE_URL = "https://blyqbosfgdrqqavljdam.supabase.co";
+  const SUPABASE_KEY = "Sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
 
-function checkPasswords() {
-  confirmPassword.setCustomValidity(
-    confirmPassword.value !== "" &&
-    confirmPassword.value !== password.value
-      ? "Passwords do not match."
-      : ""
-  );
-}
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-password.addEventListener("input", checkPasswords);
-confirmPassword.addEventListener("input", checkPasswords);
+  const form = document.getElementById("signupForm");
+  const password = document.getElementById("password");
+  const confirmPassword = document.getElementById("confirmPassword");
+  const message = document.getElementById("message");
 
-document.querySelectorAll(".toggle").forEach(button => {
-  button.addEventListener("click", () => {
-    const input = document.getElementById(button.dataset.target);
-    const show = input.type === "password";
-    input.type = show ? "text" : "password";
-    button.textContent = show ? "Hide" : "Show";
+  // Toggle Show/Hide Password
+  document.querySelectorAll(".toggle").forEach(button => {
+    button.addEventListener("click", () => {
+      const input = document.getElementById(button.dataset.target);
+      const show = input.type === "password";
+      input.type = show ? "text" : "password";
+      button.textContent = show ? "Hide" : "Show";
+    });
   });
-});
 
-form.addEventListener("submit", event => {
-  event.preventDefault();
-  checkPasswords();
+  form.addEventListener("submit", async event => {
+    event.preventDefault();
 
-  if (!form.reportValidity()) return;
+    if (password.value !== confirmPassword.value) {
+      message.style.color = "#ff8b8b";
+      message.textContent = "Passwords do not match.";
+      return;
+    }
 
-  const fullName = document.getElementById("fullName").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+    message.style.color = "#38d5f4";
+    message.textContent = "Creating your account...";
 
-  message.style.color = "#38d5f4";
-  message.textContent = "Account created successfully! Opening dashboard...";
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
 
-  // Save user details locally for login & dashboard recognition
-  const userData = { fullName, email, phone };
-  localStorage.setItem("hassanfx_user", JSON.stringify(userData));
+    try {
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password.value,
+        options: {
+          data: {
+            full_name: fullName,
+            phone: phone
+          }
+        }
+      });
 
-  // Instantly redirect to your trading dashboard file (index.html) after 1 second
-  setTimeout(() => {
-    window.location.href = "index.html"; 
-  }, 1000);
-});
+      if (error) throw error;
+
+      message.style.color = "#f5c94b";
+      message.textContent = "Account created successfully! Opening dashboard...";
+
+      // Also store user in localStorage as fallback
+      localStorage.setItem("hassanfx_user", JSON.stringify({ fullName, email, phone }));
+
+      // Redirect directly to your trading dashboard
+      setTimeout(() => {
+        window.location.href = "index.html"; 
+      }, 1000);
+
+    } catch (error) {
+      message.style.color = "#ff8b8b";
+      message.textContent = error.message || "Registration failed. Please try again.";
+    }
+  });
 </script>
 
 </body>
