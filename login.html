@@ -255,13 +255,24 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 const SUPABASE_URL =
-  "https://blyqbosfgdrqqavlijdam.supabase.co";
+  "https://blyqbosfgdrqqavljdam.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
+  "YOUR_EXISTING_SB_PUBLISHABLE_KEY";
 
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+// Keep your login form's submit handler below this.
+</script>
+ 
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 const loginButton = loginForm.querySelector(".login-btn");
