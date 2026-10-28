@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,6 +130,11 @@
       transform: translateY(-1px);
     }
 
+    .login-btn:disabled {
+      opacity: 0.65;
+      cursor: wait;
+    }
+
     #message {
       min-height: 22px;
       margin-top: 16px;
@@ -200,10 +206,16 @@
       </div>
 
       <div class="forgot-container">
-        <button type="button" class="forgot-link" id="forgotBtn">Forgot password?</button>
+        <button
+          type="button"
+          class="forgot-link"
+          id="forgotBtn"
+        >
+          Forgot password?
+        </button>
       </div>
 
-      <button class="login-btn" type="submit">
+      <button class="login-btn" id="loginBtn" type="submit">
         LOGIN →
       </button>
 
@@ -224,23 +236,30 @@
     const form = document.getElementById("loginForm");
     const message = document.getElementById("message");
     const forgotBtn = document.getElementById("forgotBtn");
+    const loginBtn = document.getElementById("loginBtn");
 
     function showMessage(text, color) {
       message.textContent = text;
       message.style.color = color;
     }
 
-    // Handle Forgot Password Click
-    forgotBtn.addEventListener("click", () => {
-      const emailInput = document.getElementById("email").value.trim();
-      if (!emailInput) {
-        showMessage("Please enter your email address above first.", "#ff7777");
+    forgotBtn.addEventListener("click", function() {
+      const email = document.getElementById("email").value.trim();
+
+      if (!email) {
+        showMessage(
+          "Please enter your email address first.",
+          "#ff7777"
+        );
         return;
       }
-      showMessage("Password reset link sent to " + emailInput + "! Check your inbox.", "#00d9a0");
+
+      showMessage(
+        "Password recovery is not connected yet. Please contact support.",
+        "#ffcc66"
+      );
     });
 
-    // Handle Login Submission
     form.addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -248,14 +267,24 @@
       const password = document.getElementById("password").value;
 
       if (!email || !password) {
-        showMessage("Please enter your email and password.", "#ff7777");
+        showMessage(
+          "Please enter your email and password.",
+          "#ff7777"
+        );
         return;
       }
 
-      showMessage("Login successful! Opening dashboard...", "#00d9a0");
-      setTimeout(() => {
-        window.location.href = "index.html"; // Opens your trading dashboard page
-      }, 1000);
+      loginBtn.disabled = true;
+      loginBtn.textContent = "PLEASE WAIT...";
+
+      showMessage(
+        "Opening dashboard...",
+        "#00d9a0"
+      );
+
+      setTimeout(function() {
+        window.location.href = "loading.html";
+      }, 500);
     });
   </script>
 </body>
