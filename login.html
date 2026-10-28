@@ -2,336 +2,345 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#041020">
-<title>Login | HassanFX</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#041020">
+  <title>Login | HassanFX</title>
 
-<style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #041020;
-  color: white;
-}
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      color: #ffffff;
+      background:
+        radial-gradient(circle at top, #123052 0%, transparent 45%),
+        #041020;
+    }
 
-header {
-  padding: 22px 6%;
-  border-bottom: 1px solid #17334f;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 35px 28px;
+      border: 1px solid #243b56;
+      border-radius: 20px;
+      background: rgba(9, 24, 43, 0.97);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
 
-.logo {
-  font-size: 27px;
-  font-weight: bold;
-}
+    .logo {
+      margin-bottom: 12px;
+      color: #00d9a0;
+      font-size: 30px;
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: 1px;
+    }
 
-.logo span {
-  color: #00d990;
-}
+    .logo span {
+      color: #ffffff;
+    }
 
-header a, .signup-link {
-  color: #13a4ff;
-  text-decoration: none;
-}
+    h1 {
+      margin-bottom: 10px;
+      font-size: 27px;
+      text-align: center;
+      animation: floatText 2.5s ease-in-out infinite;
+    }
 
-header a {
-  border: 1px solid #078dff;
-  border-radius: 8px;
-  padding: 11px 18px;
-}
+    .subtitle {
+      margin-bottom: 28px;
+      color: #a8bad0;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+    }
 
-main {
-  padding: 55px 16px;
-}
+    .field {
+      margin-bottom: 18px;
+    }
 
-.heading {
-  text-align: center;
-  margin-bottom: 28px;
-  animation: enter 1s ease both;
-}
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #dce7f5;
+      font-size: 14px;
+      font-weight: bold;
+    }
 
-.heading h1 {
-  font-size: clamp(32px, 6vw, 46px);
-  margin-bottom: 14px;
-}
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #30465f;
+      border-radius: 10px;
+      outline: none;
+      background: #071527;
+      color: #ffffff;
+      font-size: 15px;
+    }
 
-.heading h1 span {
-  display: inline-block;
-  background: linear-gradient(
-    90deg, #00d990, #00cfff, #00ff9d
-  );
-  background-size: 200% auto;
-  color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
-  animation: flow 4s linear infinite,
-             float 3s ease-in-out infinite;
-}
+    input:focus {
+      border-color: #00d9a0;
+      box-shadow: 0 0 0 3px rgba(0, 217, 160, 0.12);
+    }
 
-.heading p {
-  color: #9fb5d3;
-  line-height: 1.7;
-}
+    .login-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #00d9a0;
+      color: #041020;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-.card {
-  max-width: 480px;
-  margin: auto;
-  padding: 30px;
-  border: 1px solid #23466c;
-  border-radius: 18px;
-  background: #091a30;
-  box-shadow: 0 15px 50px #0005;
-  animation: enter 1.2s ease both;
-}
+    .login-btn:hover {
+      background: #00efb1;
+      transform: translateY(-1px);
+    }
 
-.field {
-  margin-bottom: 22px;
-}
+    .login-btn:disabled {
+      opacity: 0.6;
+      cursor: wait;
+      transform: none;
+    }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 9px;
-}
+    #message {
+      min-height: 22px;
+      margin-top: 16px;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+      overflow-wrap: anywhere;
+    }
 
-input {
-  width: 100%;
-  padding: 15px;
-  border-radius: 9px;
-  border: 1px solid #355271;
-  background: #061326;
-  color: white;
-  font-size: 15px;
-  outline: none;
-}
+    .links {
+      margin-top: 24px;
+      color: #a8bad0;
+      font-size: 14px;
+      line-height: 2;
+      text-align: center;
+    }
 
-input:focus {
-  border-color: #00d990;
-  box-shadow: 0 0 0 2px #00d99022;
-}
+    a {
+      color: #00d9a0;
+      text-decoration: none;
+    }
 
-input::placeholder {
-  color: #8398b4;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-button {
-  cursor: pointer;
-}
+    .footer {
+      margin-top: 25px;
+      color: #72859c;
+      font-size: 12px;
+      text-align: center;
+    }
 
-.login-btn {
-  width: 100%;
-  padding: 17px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #00c979, #00e69b);
-  color: #031b17;
-  font-size: 17px;
-  font-weight: bold;
-  transition: .3s;
-}
-
-.login-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px #00d99035;
-}
-
-.login-btn:disabled {
-  opacity: .65;
-  cursor: wait;
-}
-
-.message {
-  text-align: center;
-  margin-top: 16px;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.signup-link {
-  display: block;
-  text-align: center;
-  margin-top: 22px;
-}
-
-footer {
-  text-align: center;
-  padding: 25px 15px;
-  color: #829ab8;
-  font-size: 13px;
-}
-
-@keyframes enter {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes flow {
-  from { background-position: 0% center; }
-  to { background-position: 200% center; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@media (max-width: 480px) {
-  header { padding: 18px; }
-  .logo { font-size: 23px; }
-  .card { padding: 22px 18px; }
-  main { padding: 38px 15px; }
-}
-</style>
+    @keyframes floatText {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <main class="login-card">
+    <div class="logo">Hassan<span>FX</span></div>
 
-<header>
-  <div class="logo">Hassan<span>FX</span></div>
-  <a href="signup.html">Sign Up</a>
-</header>
+    <h1>Welcome Back</h1>
 
-<main>
-  <div class="heading">
-    <h1>Welcome <span>Back</span></h1>
-    <p>Log in to your HassanFX account.</p>
-  </div>
+    <p class="subtitle">
+      Log in to your account to continue to your trading dashboard.
+    </p>
 
-  <form class="card" id="loginForm">
-    <div class="field">
-      <label for="email">Email Address</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        placeholder="Enter your email"
-        autocomplete="email"
-        required>
+    <form id="loginForm">
+      <div class="field">
+        <label for="email">Email address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <button class="login-btn" type="submit">
+        LOGIN →
+      </button>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="links">
+      Don't have an account?
+      <a href="signup.html">Create account</a>
     </div>
 
-    <div class="field">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-        required>
+    <div class="footer">
+      © 2026 HassanFX. All rights reserved.
     </div>
+  </main>
 
-    <button class="login-btn" type="submit">
-      LOGIN →
-    </button>
+  <!-- Load Supabase JavaScript once -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    <p class="message" id="message"
-       role="status" aria-live="polite"></p>
+  <script>
+    // Your Supabase project settings
+    const SUPABASE_URL =
+      "https://blyqbosfgdrqqavljdam.supabase.co";
 
-    <a href="signup.html" class="signup-link">
-      Don't have an account? Create one
-    </a>
-  </form>
-</main>
+    // This must be your actual Supabase publishable key
+    const SUPABASE_KEY =
+      "sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
 
-<footer>
-  © 2026 HassanFX. All rights reserved.
-</footer>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+    const button = form.querySelector(".login-btn");
 
+    function showMessage(text, color) {
+      message.textContent = text;
+      message.style.color = color;
+    }
 
+    let supabaseClient = null;
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    try {
+      if (!window.supabase) {
+        throw new Error("Supabase library did not load.");
+      }
 
-<script>
-const SUPABASE_URL =
-  "https://blyqbosfgdrqqavljdam.supabase.co";
-
-const SUPABASE_KEY =
-  "PASTE_YOUR_REAL_SB_PUBLISHABLE_KEY_HERE";
-
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-const loginForm = document.getElementById("loginForm");
-const message = document.getElementById("message");
-const loginButton = loginForm.querySelector(".login-btn");
-
-function showMessage(text, color) {
-  message.textContent = text;
-  message.style.color = color;
-}
-
-loginForm.addEventListener("submit", async function(event) {
-  event.preventDefault();
-
-  if (!navigator.onLine) {
-    showMessage(
-      "You are offline. Check your internet connection.",
-      "#ffbf69"
-    );
-    return;
-  }
-
-  loginButton.disabled = true;
-  loginButton.textContent = "PLEASE WAIT...";
-  showMessage("Connecting securely...", "#9fb5d3");
-
-  try {
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: document.getElementById("email").value.trim(),
-        password: document.getElementById("password").value
-      });
-
-    if (error) throw error;
-    if (!data.session) throw new Error("No login session created.");
-
-    showMessage("Login successful! Opening dashboard...", "#00d990");
-    window.location.href = "dashboard.html";
-
-  } catch (error) {
-    console.error("Login error:", error);
-
-    if (!navigator.onLine) {
-      showMessage("You are offline. Check your internet connection.", "#ffbf69");
-    } else if (
-      error.message &&
-      error.message.toLowerCase().includes("invalid login credentials")
-    ) {
-      showMessage("Incorrect email or password.", "#ff7777");
-    } else if (
-      error.message &&
-      error.message.toLowerCase().includes("email not confirmed")
-    ) {
-      showMessage("Please confirm your email before logging in.", "#ffbf69");
-    } else {
+      supabaseClient = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+    } catch (error) {
+      console.error("Supabase setup error:", error);
       showMessage(
-        "Login failed: " + (error.message || "Please try again."),
+        "Setup error. Check your Supabase URL, key, and internet connection.",
         "#ff7777"
       );
+      button.disabled = true;
     }
-  } finally {
-    loginButton.disabled = false;
-    loginButton.textContent = "LOGIN →";
-  }
-});
-</script>
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      if (!supabaseClient) {
+        showMessage("Supabase is not connected. Check the setup.", "#ff7777");
+        return;
+      }
+
+      if (!navigator.onLine) {
+        showMessage("You are offline. Check your internet connection.", "#ffbf69");
+        return;
+      }
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!email || !password) {
+        showMessage("Please enter your email and password.", "#ff7777");
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "PLEASE WAIT...";
+      showMessage("Connecting securely...", "#a8bad0");
+
+      try {
+        const { data, error } =
+          await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+
+        if (error) {
+          throw error;
+        }
+
+        if (!data.session) {
+          throw new Error("Login session was not created.");
+        }
+
+        showMessage(
+          "Login successful! Opening dashboard...",
+          "#00d9a0"
+        );
+
+        window.location.href = "dashboard.html";
+
+      } catch (error) {
+        console.error("Login error:", error);
+
+        const errorMessage = (error.message || "").toLowerCase();
+
+        if (
+          errorMessage.includes("invalid login credentials")
+        ) {
+          showMessage(
+            "Incorrect email or password. Please try again.",
+            "#ff7777"
+          );
+        } else if (
+          errorMessage.includes("email not confirmed")
+        ) {
+          showMessage(
+            "Please confirm your email before logging in.",
+            "#ffbf69"
+          );
+        } else if (
+          errorMessage.includes("failed to fetch") ||
+          errorMessage.includes("network") ||
+          errorMessage.includes("load failed")
+        ) {
+          showMessage(
+            "Connection failed. Check your internet and Supabase project URL.",
+            "#ff7777"
+          );
+        } else {
+          showMessage(
+            "Login failed: " + (error.message || "Please try again."),
+            "#ff7777"
+          );
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = "LOGIN →";
+      }
+    });
+  </script>
 </body>
 </html>
