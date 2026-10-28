@@ -253,8 +253,6 @@ footer {
   © 2026 HassanFX. All rights reserved.
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -263,15 +261,16 @@ const SUPABASE_URL =
   "https://blyqbosfgdrqqavljdam.supabase.co";
 
 const SUPABASE_KEY =
-  "YOUR_EXISTING_SB_PUBLISHABLE_KEY";
+  "YOUR_ACTUAL_SB_PUBLISHABLE_KEY";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-// Keep your login form's submit handler below this.
+// Your login form submit handler goes below.
 </script>
+
  
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
