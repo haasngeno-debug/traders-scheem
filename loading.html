@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,11 +52,10 @@ body {
   border: 1px solid #29394a;
   border-radius: 30px;
   background: linear-gradient(145deg,
-    rgba(13, 24, 40, .98),
-    rgba(3, 11, 25, .98) 65%,
-    rgba(9, 23, 37, .98));
-  box-shadow: 0 0 50px rgba(0, 174, 255, .08),
-              0 25px 80px #000b;
+    rgba(13,24,40,.98),
+    rgba(3,11,25,.98) 65%,
+    rgba(9,23,37,.98));
+  box-shadow: 0 0 50px #00aeff14, 0 25px 80px #000b;
 }
 
 .terminal-card::before,
@@ -98,7 +98,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  border: 1px dashed rgba(245, 201, 75, .65);
+  border: 1px dashed #f5c94ba6;
   border-radius: 50%;
   animation: spin 12s linear infinite;
 }
@@ -143,8 +143,7 @@ body {
   height: 61%;
   border: 3px solid #d8b84b;
   border-radius: 30%;
-  box-shadow: 0 0 25px #e9b93622,
-              inset 0 0 25px #1d6e8b17;
+  box-shadow: 0 0 25px #e9b93622, inset 0 0 25px #1d6e8b17;
   animation: pulse 2.5s ease-in-out infinite;
 }
 
@@ -198,7 +197,6 @@ body {
 }
 
 .progress-track {
-  display: flex;
   width: 100%;
   height: 12px;
   overflow: hidden;
@@ -213,7 +211,6 @@ body {
   background: linear-gradient(90deg, #dcae32, #f5d65b, #36cfff);
   border-radius: 20px;
   transition: width .15s linear;
-  box-shadow: 0 0 12px #f5c94b66;
 }
 
 .progress-stats {
@@ -239,8 +236,8 @@ body {
 
 .spinner {
   flex-shrink: 0;
-  width: 31px;
-  height: 31px;
+  width: 20px;
+  height: 20px;
   border: 2px solid #2b3c50;
   border-top-color: #42d2ff;
   border-right-color: #f5c94b;
@@ -294,7 +291,6 @@ body {
   border-radius: 22px;
   background: linear-gradient(145deg, #112d43, #091426);
   color: #48d8ff;
-  box-shadow: inset 0 0 20px #38cfff12;
 }
 
 .feature-item:nth-child(2) .feature-icon {
@@ -468,7 +464,6 @@ body {
   </div>
 
   <div class="features-grid">
-
     <div class="feature-item">
       <div class="feature-icon">📊</div>
       <div class="feature-label">Market Analytics</div>
@@ -483,7 +478,6 @@ body {
       <div class="feature-icon">⚡</div>
       <div class="feature-label">Copy Trading</div>
     </div>
-
   </div>
 
   <div class="footer-note">
@@ -493,20 +487,13 @@ body {
 </main>
 
 <script>
-(() => {
-  const progressFill =
-    document.getElementById("progressFill");
+(function () {
+  const progressFill = document.getElementById("progressFill");
+  const progressPercent = document.getElementById("progressPercent");
+  const statusText = document.getElementById("statusText");
+  const spinner = document.getElementById("spinner");
 
-  const progressPercent =
-    document.getElementById("progressPercent");
-
-  const statusText =
-    document.getElementById("statusText");
-
-  const spinner =
-    document.getElementById("spinner");
-
-  // Redirect to your trading dashboard.
+  // Change this only if your dashboard has a different filename.
   const DASHBOARD_PAGE = "trade.html";
 
   const messages = [
@@ -514,23 +501,19 @@ body {
     { progress: 25, text: "Loading market data..." },
     { progress: 50, text: "Initializing pricing engine..." },
     { progress: 75, text: "Preparing your desk..." },
-    { progress: 90, text: "Finalizing secure login..." }
+    { progress: 90, text: "Finalizing login..." }
   ];
 
   let progress = 0;
-
-  // Loading animation lasts approximately 3.5 seconds.
   const duration = 3500;
   const intervalTime = 35;
   const increment = 100 / (duration / intervalTime);
 
-  const timer = setInterval(() => {
-
+  const timer = setInterval(function () {
     progress = Math.min(100, progress + increment);
 
     progressFill.style.width = progress + "%";
-    progressPercent.textContent =
-      Math.floor(progress) + "%";
+    progressPercent.textContent = Math.floor(progress) + "%";
 
     for (let i = messages.length - 1; i >= 0; i--) {
       if (progress >= messages[i].progress) {
@@ -541,42 +524,16 @@ body {
 
     if (progress >= 100) {
       clearInterval(timer);
-
-      statusText.textContent =
-        "Ready! Opening dashboard...";
-
+      statusText.textContent = "Ready! Opening dashboard...";
       spinner.style.display = "none";
 
-      setTimeout(() => {
-        window.location.href = DASHBOARD_PAGE;
-      }, 500);
-    }
-
-  }, intervalTime);
-})();
-</script>
-
-</body>
-  </html>
-
-    for (let i = messages.length - 1; i >= 0; i--) {
-      if (progress >= messages[i].progress) {
-        statusText.textContent = messages[i].text;
-        break;
-      }
-    }
-
-    if (progress >= 100) {
-      clearInterval(timer);
-      statusText.textContent = "Ready! Opening login...";
-      spinner.style.display = "none";
-
-      setTimeout(() => {
-        window.location.href = LOGIN_PAGE;
+      setTimeout(function () {
+        window.location.replace(DASHBOARD_PAGE);
       }, 500);
     }
   }, intervalTime);
 })();
 </script>
+
 </body>
-  </html>
+</html>
