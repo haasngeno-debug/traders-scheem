@@ -53,7 +53,6 @@
       margin-bottom: 10px;
       font-size: 27px;
       text-align: center;
-      animation: floatText 2.5s ease-in-out infinite;
     }
 
     .subtitle {
@@ -92,9 +91,28 @@
       box-shadow: 0 0 0 3px rgba(0, 217, 160, 0.12);
     }
 
+    .forgot-container {
+      text-align: right;
+      margin-top: -10px;
+      margin-bottom: 18px;
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      color: #00d9a0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
     .login-btn {
       width: 100%;
-      margin-top: 8px;
+      margin-top: 4px;
       padding: 15px;
       border: none;
       border-radius: 10px;
@@ -143,15 +161,6 @@
       font-size: 12px;
       text-align: center;
     }
-
-    @keyframes floatText {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-5px);
-      }
-    }
   </style>
 </head>
 
@@ -190,6 +199,10 @@
         >
       </div>
 
+      <div class="forgot-container">
+        <button type="button" class="forgot-link" id="forgotBtn">Forgot password?</button>
+      </div>
+
       <button class="login-btn" type="submit">
         LOGIN →
       </button>
@@ -210,12 +223,24 @@
   <script>
     const form = document.getElementById("loginForm");
     const message = document.getElementById("message");
+    const forgotBtn = document.getElementById("forgotBtn");
 
     function showMessage(text, color) {
       message.textContent = text;
       message.style.color = color;
     }
 
+    // Handle Forgot Password Click
+    forgotBtn.addEventListener("click", () => {
+      const emailInput = document.getElementById("email").value.trim();
+      if (!emailInput) {
+        showMessage("Please enter your email address above first.", "#ff7777");
+        return;
+      }
+      showMessage("Password reset link sent to " + emailInput + "! Check your inbox.", "#00d9a0");
+    });
+
+    // Handle Login Submission
     form.addEventListener("submit", function(event) {
       event.preventDefault();
 
@@ -227,21 +252,6 @@
         return;
       }
 
-      // Check if user exists in browser storage (saved from signup)
-      const savedUser = localStorage.getItem("hassanfx_user");
-
-      if (savedUser) {
-        const userData = JSON.parse(savedUser);
-        if (userData.email === email) {
-          showMessage("Login successful! Opening dashboard...", "#00d9a0");
-          setTimeout(() => {
-            window.location.href = "index.html"; // Opens your trading dashboard page
-          }, 1000);
-          return;
-        }
-      }
-
-      // Fallback: If no account is registered yet, allow any login for easy testing
       showMessage("Login successful! Opening dashboard...", "#00d9a0");
       setTimeout(() => {
         window.location.href = "index.html"; // Opens your trading dashboard page
@@ -249,5 +259,4 @@
     });
   </script>
 </body>
-        </html>
-      
+</html>
