@@ -254,6 +254,7 @@ footer {
 </footer>
 
 
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -261,17 +262,13 @@ const SUPABASE_URL =
   "https://blyqbosfgdrqqavljdam.supabase.co";
 
 const SUPABASE_KEY =
-  "YOUR_ACTUAL_SB_PUBLISHABLE_KEY";
+  "PASTE_YOUR_REAL_SB_PUBLISHABLE_KEY_HERE";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-// Your login form submit handler goes below.
-</script>
-
- 
 const loginForm = document.getElementById("loginForm");
 const message = document.getElementById("message");
 const loginButton = loginForm.querySelector(".login-btn");
@@ -286,22 +283,11 @@ loginForm.addEventListener("submit", async function(event) {
 
   if (!navigator.onLine) {
     showMessage(
-      "You are offline. Please check your internet connection.",
+      "You are offline. Check your internet connection.",
       "#ffbf69"
     );
     return;
   }
-
-  if (!window.supabase) {
-    showMessage(
-      "The login service did not load. Refresh the page and try again.",
-      "#ff7777"
-    );
-    return;
-  }
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
 
   loginButton.disabled = true;
   loginButton.textContent = "PLEASE WAIT...";
@@ -310,66 +296,42 @@ loginForm.addEventListener("submit", async function(event) {
   try {
     const { data, error } =
       await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value
       });
 
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
+    if (!data.session) throw new Error("No login session created.");
 
-    if (!data.session) {
-      throw new Error("No login session was created.");
-    }
-
-    showMessage(
-      "Login successful! Opening your dashboard...",
-      "#00d990"
-    );
-
+    showMessage("Login successful! Opening dashboard...", "#00d990");
     window.location.href = "dashboard.html";
 
   } catch (error) {
-    console.error("Supabase login error:", error);
+    console.error("Login error:", error);
 
     if (!navigator.onLine) {
-      showMessage(
-        "You are offline. Please check your internet connection.",
-        "#ffbf69"
-      );
+      showMessage("You are offline. Check your internet connection.", "#ffbf69");
     } else if (
       error.message &&
       error.message.toLowerCase().includes("invalid login credentials")
     ) {
-      showMessage(
-        "Incorrect email or password. Please try again.",
-        "#ff7777"
-      );
+      showMessage("Incorrect email or password.", "#ff7777");
     } else if (
       error.message &&
       error.message.toLowerCase().includes("email not confirmed")
     ) {
-      showMessage(
-        "Please confirm your email before logging in.",
-        "#ffbf69"
-      );
+      showMessage("Please confirm your email before logging in.", "#ffbf69");
     } else {
       showMessage(
         "Login failed: " + (error.message || "Please try again."),
         "#ff7777"
       );
     }
-
   } finally {
     loginButton.disabled = false;
     loginButton.textContent = "LOGIN →";
   }
 });
-
-const supabaseClient = window.supabase
-  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-  : null;
 </script>
-
 </body>
 </html>
