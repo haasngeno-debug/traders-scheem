@@ -318,7 +318,8 @@ footer {
       </div>
     </div>
 
-    <button class="continue" type="submit">
+    <button class="continue" type="button" onclick="goToDashboard()">
+
       CONTINUE →
     </button>
 
@@ -400,12 +401,22 @@ form.addEventListener("submit", async event => {
       }
     });
 
-    if (error) throw error;
+        if (error) throw error;
 
-    message.style.color = "#f5c94b";
-    message.textContent = data.session
-      ? "Account created! You can now log in."
-      : "Registration received! Check your email to confirm your account.";
+    // If Supabase creates a session immediately upon signup
+    if (data.session) {
+      message.style.color = "#10B981";
+      message.textContent = "Account created successfully! Redirecting...";
+      
+      // Redirect to your trading platform / dashboard page after 1 second
+      setTimeout(() => {
+        window.location.href = "index.html"; // <-- Replace with your dashboard filename (e.g., dashboard.html or trading.html)
+      }, 1000);
+    } else {
+      message.style.color = "#f5c94b";
+      message.textContent = "Registration received! Check your email to confirm.";
+  }
+  
   } catch (error) {
     message.style.color = "#ff8b8b";
     message.textContent = error.message ||
