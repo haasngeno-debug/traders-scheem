@@ -338,7 +338,17 @@ footer {
   © 2026 Traders Scheem. All rights reserved.
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://blyqbosfgdrqqavlijdam.supabase.co";
+const SUPABASE_KEY = "sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
 const form = document.getElementById("signupForm");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
@@ -360,26 +370,50 @@ document.querySelectorAll(".toggle").forEach(button => {
   button.addEventListener("click", () => {
     const input = document.getElementById(button.dataset.target);
     const show = input.type === "password";
-
     input.type = show ? "text" : "password";
     button.textContent = show ? "Hide" : "Show";
   });
 });
 
-form.addEventListener("submit", event => {
+form.addEventListener("submit", async event => {
   event.preventDefault();
   checkPasswords();
 
-  message.style.color = "#ff8b8b";
-  message.textContent = "";
-
   if (!form.reportValidity()) return;
 
-  message.style.color = "#f5c94b";
-  message.textContent =
-    "Your details are valid. Account creation requires a secure registration backend.";
+  message.style.color = "#ff8b8b";
+  message.textContent = "Creating your account...";
+
+  const fullName = document.getElementById("fullName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+
+  try {
+    const { data, error } = await supabaseClient.auth.signUp({
+      email: email,
+      password: password.value,
+      options: {
+        data: {
+          full_name: fullName,
+          phone: phone
+        }
+      }
+    });
+
+    if (error) throw error;
+
+    message.style.color = "#f5c94b";
+    message.textContent = data.session
+      ? "Account created! You can now log in."
+      : "Registration received! Check your email to confirm your account.";
+  } catch (error) {
+    message.style.color = "#ff8b8b";
+    message.textContent = error.message ||
+      "Registration failed. Please try again.";
+  }
 });
 </script>
+
 
 </body>
 </html> 
