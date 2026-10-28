@@ -1,8 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#041020">
 <title>Login | HassanFX</title>
 
 <style>
@@ -71,7 +73,8 @@ main {
   color: transparent;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: flow 4s linear infinite, float 3s ease-in-out infinite;
+  animation: flow 4s linear infinite,
+             float 3s ease-in-out infinite;
 }
 
 .heading p {
@@ -141,11 +144,17 @@ button {
   box-shadow: 0 8px 25px #00d99035;
 }
 
+.login-btn:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
 .message {
   text-align: center;
   margin-top: 16px;
   font-size: 14px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .signup-link {
@@ -162,8 +171,14 @@ footer {
 }
 
 @keyframes enter {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes flow {
@@ -225,8 +240,8 @@ footer {
       LOGIN →
     </button>
 
-    <p class="message" id="message" role="status"
-       aria-live="polite"></p>
+    <p class="message" id="message"
+       role="status" aria-live="polite"></p>
 
     <a href="signup.html" class="signup-link">
       Don't have an account? Create one
@@ -238,16 +253,112 @@ footer {
   © 2026 HassanFX. All rights reserved.
 </footer>
 
-<script>
-document.getElementById("loginForm").addEventListener(
-  "submit", function(event) {
-    event.preventDefault();
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    document.getElementById("message").style.color = "#ffbf69";
-    document.getElementById("message").textContent =
-      "Login page ready. A secure authentication backend is needed to verify your account.";
+<script>
+const SUPABASE_URL =
+  "https://blyqbosfgdrqqavlijdam.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
+
+const loginForm = document.getElementById("loginForm");
+const message = document.getElementById("message");
+const loginButton = loginForm.querySelector(".login-btn");
+
+function showMessage(text, color) {
+  message.textContent = text;
+  message.style.color = color;
+}
+
+loginForm.addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  if (!navigator.onLine) {
+    showMessage(
+      "You are offline. Please check your internet connection.",
+      "#ffbf69"
+    );
+    return;
   }
-);
+
+  if (!window.supabase) {
+    showMessage(
+      "The login service did not load. Refresh the page and try again.",
+      "#ff7777"
+    );
+    return;
+  }
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  loginButton.disabled = true;
+  loginButton.textContent = "PLEASE WAIT...";
+  showMessage("Connecting securely...", "#9fb5d3");
+
+  try {
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data.session) {
+      throw new Error("No login session was created.");
+    }
+
+    showMessage(
+      "Login successful! Opening your dashboard...",
+      "#00d990"
+    );
+
+    window.location.href = "dashboard.html";
+
+  } catch (error) {
+    console.error("Supabase login error:", error);
+
+    if (!navigator.onLine) {
+      showMessage(
+        "You are offline. Please check your internet connection.",
+        "#ffbf69"
+      );
+    } else if (
+      error.message &&
+      error.message.toLowerCase().includes("invalid login credentials")
+    ) {
+      showMessage(
+        "Incorrect email or password. Please try again.",
+        "#ff7777"
+      );
+    } else if (
+      error.message &&
+      error.message.toLowerCase().includes("email not confirmed")
+    ) {
+      showMessage(
+        "Please confirm your email before logging in.",
+        "#ffbf69"
+      );
+    } else {
+      showMessage(
+        "Login failed: " + (error.message || "Please try again."),
+        "#ff7777"
+      );
+    }
+
+  } finally {
+    loginButton.disabled = false;
+    loginButton.textContent = "LOGIN →";
+  }
+});
+
+const supabaseClient = window.supabase
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
 </script>
 
 </body>
