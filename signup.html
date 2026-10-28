@@ -243,48 +243,92 @@ footer {
   © 2026 Traders Scheem. All rights reserved.
 </footer>
 
+
 <script>
+(function () {
   const form = document.getElementById("signupForm");
+  const message = document.getElementById("message");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
-  const message = document.getElementById("message");
 
-  // Toggle Show/Hide Password
-  document.querySelectorAll(".toggle").forEach(button => {
-    button.addEventListener("click", () => {
+  // Show or hide passwords
+  document.querySelectorAll(".toggle").forEach(function (button) {
+    button.addEventListener("click", function () {
       const input = document.getElementById(button.dataset.target);
-      const show = input.type === "password";
-      input.type = show ? "text" : "password";
-      button.textContent = show ? "Hide" : "Show";
+      const showPassword = input.type === "password";
+
+      input.type = showPassword ? "text" : "password";
+      button.textContent = showPassword ? "Hide" : "Show";
     });
   });
 
-  form.addEventListener("submit", event => {
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
+
+    const fullName =
+      document.getElementById("fullName").value.trim();
+    const email =
+      document.getElementById("email").value.trim().toLowerCase();
+    const phone =
+      document.getElementById("phone").value.trim();
+
+    if (!fullName || !email || !phone ||
+        !password.value || !confirmPassword.value) {
+      message.style.color = "#ff8b8b";
+      message.textContent = "Please complete all fields.";
+      return;
+    }
+
+    if (password.value.length < 4) {
+      message.style.color = "#ff8b8b";
+      message.textContent =
+        "Your password must be at least 4 characters.";
+      return;
+    }
 
     if (password.value !== confirmPassword.value) {
       message.style.color = "#ff8b8b";
       message.textContent = "Passwords do not match.";
+      confirmPassword.focus();
       return;
     }
 
-    const fullName = document.getElementById("fullName").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    // Save profile details only; do not store the password.
+    const userData = {
+      fullName: fullName,
+      email: email,
+      phone: phone
+    };
 
+    try {
+      localStorage.setItem(
+        "hassanfx_user",
+        JSON.stringify(userData)
+      );
+    } catch (error) {
+      message.style.color = "#ff8b8b";
+      message.textContent =
+        "Could not save your details. Please try again.";
+      return;
+    }
+
+    const submitButton = form.querySelector(
+      'button[type="submit"]'
+    );
+
+    submitButton.disabled = true;
+    submitButton.textContent = "ACCOUNT READY...";
     message.style.color = "#f5c94b";
-    message.textContent = "Account created successfully! Opening dashboard...";
+    message.textContent =
+      "Details saved! Opening the loading screen...";
 
-    // Save user info locally in the browser
-    const userData = { fullName, email, phone };
-    localStorage.setItem("hassanfx_user", JSON.stringify(userData));
-
-    // Redirect straight to your trading dashboard (index.html)
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 1000);
+    setTimeout(function () {
+      window.location.href = "loading.html";
+    }, 500);
   });
+})();
 </script>
+
 
 </body>
 </html>
