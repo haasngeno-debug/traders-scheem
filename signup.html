@@ -148,6 +148,11 @@ input:focus {
   cursor: pointer;
 }
 
+.continue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px #f5c94b35;
+}
+
 .message {
   margin-top: 15px;
   text-align: center;
@@ -238,16 +243,7 @@ footer {
   © 2026 Traders Scheem. All rights reserved.
 </footer>
 
-<!-- Load Supabase Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-  // Your exact Supabase URL & publishable key
-  const SUPABASE_URL = "https://blyqbosfgdrqqavljdam.supabase.co";
-  const SUPABASE_KEY = "Sb_publishable_mHYfGhz-2CC5pXGq166hZg_KQaNEeJ4";
-
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
   const form = document.getElementById("signupForm");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
@@ -263,7 +259,7 @@ footer {
     });
   });
 
-  form.addEventListener("submit", async event => {
+  form.addEventListener("submit", event => {
     event.preventDefault();
 
     if (password.value !== confirmPassword.value) {
@@ -272,42 +268,21 @@ footer {
       return;
     }
 
-    message.style.color = "#38d5f4";
-    message.textContent = "Creating your account...";
-
     const fullName = document.getElementById("fullName").value.trim();
     const email = document.getElementById("email").value.trim();
     const phone = document.getElementById("phone").value.trim();
 
-    try {
-      const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password.value,
-        options: {
-          data: {
-            full_name: fullName,
-            phone: phone
-          }
-        }
-      });
+    message.style.color = "#f5c94b";
+    message.textContent = "Account created successfully! Opening dashboard...";
 
-      if (error) throw error;
+    // Save user info locally in the browser
+    const userData = { fullName, email, phone };
+    localStorage.setItem("hassanfx_user", JSON.stringify(userData));
 
-      message.style.color = "#f5c94b";
-      message.textContent = "Account created successfully! Opening dashboard...";
-
-      // Also store user in localStorage as fallback
-      localStorage.setItem("hassanfx_user", JSON.stringify({ fullName, email, phone }));
-
-      // Redirect directly to your trading dashboard
-      setTimeout(() => {
-        window.location.href = "index.html"; 
-      }, 1000);
-
-    } catch (error) {
-      message.style.color = "#ff8b8b";
-      message.textContent = error.message || "Registration failed. Please try again.";
-    }
+    // Redirect straight to your trading dashboard (index.html)
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 1000);
   });
 </script>
 
