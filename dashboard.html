@@ -84,26 +84,298 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 .modal-box h3{font-size:14px;margin-bottom:12px}
 .modal-box input{width:100%;background:#0A101E;border:1px solid #1E293B;border-radius:10px;padding:12px;color:#fff;font-size:14px;margin-bottom:12px}
 .modal-box button{width:100%;background:#3B82F6;border:none;border-radius:10px;padding:12px;color:#fff;font-weight:800;cursor:pointer}
+
+/* ===== TRADERSCHEEEM SIDE MENU ===== */
+.menu-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:300;
+  opacity:0;
+  visibility:hidden;
+  transition:.25s;
+}
+.menu-overlay.open{opacity:1;visibility:visible}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  left:0;
+  bottom:0;
+  width:min(310px,85vw);
+  background:#171e2d;
+  z-index:301;
+  transform:translateX(-105%);
+  transition:transform .25s ease;
+  overflow-y:auto;
+  padding-bottom:20px;
+}
+.side-menu.open{transform:translateX(0)}
+
+.menu-head{
+  height:75px;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #293246;
+}
+.menu-head b{font-size:18px}
+.menu-close{
+  background:none;
+  border:0;
+  color:white;
+  font-size:27px;
+  cursor:pointer;
+}
+.user-profile{
+  padding:22px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  border-bottom:1px solid #293246;
+}
+.user-avatar{
+  width:58px;
+  height:58px;
+  background:#3478ed;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  font-weight:800;
+  flex-shrink:0;
+}
+.user-details{min-width:0}
+.user-details strong{
+  display:block;
+  font-size:16px;
+  margin-bottom:5px;
+}
+.user-details small{
+  color:#9ca6b8;
+  font-size:12px;
+  overflow-wrap:anywhere;
+}
+.brand-row{
+  padding:17px 22px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#cbd5e1;
+  font-size:15px;
+  border-bottom:1px solid #293246;
+}
+.brand-icon{
+  width:32px;
+  height:32px;
+  background:#ff4d5a;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-weight:900;
+}
+.menu-items{padding:10px 0}
+.menu-item{
+  width:100%;
+  height:58px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:0 23px;
+  border:0;
+  background:transparent;
+  color:#c4cbd8;
+  font-size:15px;
+  text-align:left;
+  cursor:pointer;
+}
+.menu-item:hover{background:#222c40;color:white}
+.menu-icon{width:25px;font-size:21px;text-align:center}
+.menu-arrow{margin-left:auto;color:#758198}
+.menu-section{
+  border-top:1px solid #293246;
+  padding:10px 0;
+}
+.menu-item.referral{background:#27223d;color:#bd83f5}
+.theme-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 23px;
+  border-top:1px solid #293246;
+  border-bottom:1px solid #293246;
+  color:#cbd5e1;
+}
+.theme-switch{
+  width:48px;
+  height:27px;
+  border-radius:20px;
+  background:#475569;
+  border:0;
+  position:relative;
+  cursor:pointer;
+}
+.theme-switch:after{
+  content:"";
+  position:absolute;
+  width:19px;
+  height:19px;
+  border-radius:50%;
+  background:white;
+  top:4px;
+  left:4px;
+  transition:.2s;
+}
+.theme-switch.active{background:#3478ed}
+.theme-switch.active:after{left:25px}
+.logout-item{color:#ff5966}
+.menu-footer{
+  padding:25px 10px;
+  margin-top:10px;
+  text-align:center;
+  font-size:11px;
+  color:#64748b;
+  border-top:1px solid #293246;
+}
+.info-modal{
+  position:fixed;
+  inset:0;
+  z-index:400;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.info-modal.open{display:flex}
+.info-box{
+  background:#171e2d;
+  border:1px solid #293246;
+  border-radius:15px;
+  padding:22px;
+  width:100%;
+  max-width:350px;
+}
+.info-box h3{margin-bottom:12px}
+.info-box p{color:#aab5c7;font-size:14px;line-height:1.6}
+.info-box button{
+  margin-top:18px;
+  width:100%;
+  padding:12px;
+  background:#3478ed;
+  color:white;
+  border:0;
+  border-radius:9px;
+}
+body.light{background:#f1f5f9;color:#172033}
+body.light .top,
+body.light .bottom,
+body.light .side-menu,
+body.light .info-box{background:#fff;color:#172033}
+body.light .menu-item,
+body.light .theme-row{color:#334155}
+body.light .menu-head .menu-close{color:#172033}
+  
 </style>
 </head>
 <body>
 
+
 <div class="top">
-  <div class="top-l"><div class="ham"></div><div class="t">T</div><button class="dep-left" onclick="openDep()">Deposit</button></div>
+  <div class="top-l">
+    <button class="ham" aria-label="Open menu" onclick="openSideMenu()"></button>
+    <div class="t">T</div>
+    <button class="dep-left" onclick="openDep()">Deposit</button>
+  </div>
+
   <div class="bal-wrap">
-    <div class="rbal" id="balBtn" onclick="toggleBal()"><div class="r demo" id="balIcon">D</div><b id="balText" style="color:#FF4D5A">$ 10,000</b><span style="font-size:10px;color:#5B6B85">▼</span></div>
+    <div class="rbal" id="balBtn" onclick="toggleBal()">
+      <div class="r demo" id="balIcon">D</div>
+      <b id="balText" style="color:#FF4D5A">$ 10,000</b>
+      <span style="font-size:10px;color:#5B6B85">▼</span>
+    </div>
+
     <div class="bal-dropdown" id="balDrop">
       <div class="acc-opt on" id="demoOpt" onclick="switchAcc('demo')">
-        <div class="left"><div class="circle demo">D</div><div><b>DEMO Account</b><small id="demoBalTxt">$10,000.00</small></div></div><span style="color:#3B82F6">✓</span>
+        <div class="left">
+          <div class="circle demo">D</div>
+          <div><b>DEMO Account</b><small id="demoBalTxt">$10,000.00</small></div>
+        </div>
+        <span style="color:#3B82F6">✓</span>
       </div>
+
       <div class="acc-opt" id="realOpt" onclick="switchAcc('real')">
-        <div class="left"><div class="circle real">R</div><div><b>REAL Account</b><small id="realBalTxt">$0.00</small></div></div><span></span>
+        <div class="left">
+          <div class="circle real">R</div>
+          <div><b>REAL Account</b><small id="realBalTxt">$0.00</small></div>
+        </div>
+        <span></span>
       </div>
+
       <div class="reset-btn" onclick="resetDemo()">🔄 Reset Demo Balance to $10,000</div>
     </div>
   </div>
 </div>
 
+<!-- TRADERSCHEEEM SIDE MENU -->
+
+<div class="menu-overlay" id="menuOverlay" onclick="closeSideMenu()"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+  <div class="menu-head">
+    <b>Menu</b>
+    <button class="menu-close" onclick="closeSideMenu()">×</button>
+  </div>
+
+  <div class="user-profile">
+    <div class="user-avatar" id="userAvatar">U</div>
+    <div class="user-details">
+      <strong id="userName">User</strong>
+      <small id="userEmail">Loading email...</small>
+    </div>
+  </div>
+
+  <div class="brand-row">
+    <div class="brand-icon">T</div>
+    <b>traderscheeem.com</b>
+  </div>
+
+  <div class="menu-items">
+    <button class="menu-item" onclick="menuAction('settings')">⚙ Account settings</button>
+    <button class="menu-item" onclick="menuAction('deposit')">⊙ Deposit</button>
+    <button class="menu-item" onclick="menuAction('withdraw')">↑ Withdraw</button>
+    <button class="menu-item" onclick="menuAction('history')">◷ History</button>
+    <button class="menu-item referral" onclick="menuAction('referral')">🎁 Refer & Earn</button>
+  </div>
+
+  <div class="theme-row">
+    <span>☾ Dark theme</span>
+    <button id="themeSwitch" class="theme-switch active" onclick="toggleTheme()"></button>
+  </div>
+
+  <div class="menu-section">
+    <button class="menu-item" onclick="menuAction('help')">ⓘ Help Centre</button>
+    <button class="menu-item" onclick="menuAction('responsible')">♧ Responsible Trading</button>
+    <button class="menu-item" onclick="menuAction('chat')">▢ Live Chat</button>
+    <button class="menu-item logout-item" onclick="logoutUser()">⇥ Log out</button>
+  </div>
+
+  <div class="menu-footer">traderscheeem.com</div>
+
+</aside>
+
+<div class="info-modal" id="infoModal">
+  <div class="info-box">
+    <h3 id="infoTitle">Information</h3>
+    <p id="infoText"></p>
+    <button onclick="closeInfo()">Close</button>
+  </div>
+    </div>
 <div class="tabs"><button>◎ Matches/Differs</button><button class="on">⊞ Even/Odd</button><button>⇅ Over/Under</button></div>
 
 <div class="vol-row">
@@ -241,6 +513,118 @@ renderDigits(); draw(); updPay(); updateBalDisplay();
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
+  // SIDEBAR MENU FUNCTIONS
+
+function openSideMenu() {
+  document.getElementById('sideMenu').classList.add('open');
+  document.getElementById('menuOverlay').classList.add('show');
+}
+
+function closeSideMenu() {
+  document.getElementById('sideMenu').classList.remove('open');
+  document.getElementById('menuOverlay').classList.remove('show');
+}
+
+function closeInfo() {
+  document.getElementById('infoModal').classList.remove('open');
+}
+
+function showInfo(title, message) {
+  document.getElementById('infoTitle').innerText = title;
+  document.getElementById('infoText').innerText = message;
+  document.getElementById('infoModal').classList.add('open');
+}
+
+function menuAction(action) {
+  closeSideMenu();
+
+  if (action === 'deposit') {
+    openDep();
+  } else if (action === 'withdraw') {
+    window.location.href = 'withdraw.html';
+  } else if (action === 'history') {
+    window.location.href = 'history.html';
+  } else if (action === 'settings') {
+    showInfo('Account Settings', 'Account settings will be available soon.');
+  } else if (action === 'referral') {
+    showInfo('Refer & Earn', 'Referral rewards will be available soon.');
+  } else if (action === 'help') {
+    showInfo('Help Centre', 'Please contact our support team for assistance.');
+  } else if (action === 'responsible') {
+    showInfo('Responsible Trading', 'Trade carefully and understand the risks.');
+  } else if (action === 'chat') {
+    showInfo('Live Chat', 'Live chat will be available soon.');
+  }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('light');
+
+  const enabled = !document.body.classList.contains('light');
+  document.getElementById('themeSwitch').classList.toggle('active', enabled);
+
+  localStorage.setItem('sidebarTheme', enabled ? 'dark' : 'light');
+}
+
+function loadTheme() {
+  const theme = localStorage.getItem('sidebarTheme') || 'dark';
+  document.body.classList.toggle('light', theme === 'light');
+  document.getElementById('themeSwitch').classList.toggle('active', theme === 'dark');
+}
+
+function loadSidebarUser() {
+  const keys = [
+    'hassanfx_user',
+    'traderscheem_user',
+    'currentUser',
+    'loggedInUser',
+    'user',
+    'userData'
+  ];
+
+  let email = '';
+
+  for (const key of keys) {
+    try {
+      const saved = localStorage.getItem(key);
+      if (!saved) continue;
+
+      const data = JSON.parse(saved);
+
+      if (typeof data === 'string' && data.includes('@')) {
+        email = data;
+      } else if (data && typeof data === 'object') {
+        email = data.email || data.user?.email || '';
+      }
+
+      if (email) break;
+    } catch (error) {
+      const saved = localStorage.getItem(key);
+      if (saved && saved.includes('@')) {
+        email = saved;
+        break;
+      }
+    }
+  }
+
+  document.getElementById('userEmail').innerText =
+    email || 'Email not found';
+
+  document.getElementById('userName').innerText =
+    email ? email.split('@')[0] : 'User';
+
+  document.getElementById('userAvatar').innerText =
+    email ? email.charAt(0).toUpperCase() : 'U';
+}
+
+function logoutUser() {
+  if (confirm('Are you sure you want to log out?')) {
+    window.location.href = 'index.html';
+  }
+}
+
+loadTheme();
+loadSidebarUser();
 </script>
 </body>
 </html>
