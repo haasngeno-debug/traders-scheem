@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Real Account Withdrawal | TradersCheeem</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;background:#080f1e;color:white;font-family:Arial}
+.container{max-width:480px;margin:auto}
+.card{background:#172236;padding:22px;border-radius:14px;margin-top:25px}
+button{padding:12px 18px;border:0;border-radius:9px;background:#3478ed;color:white}
+input{width:100%;padding:14px;margin-top:10px;background:#0c1628;color:white;border:1px solid #34445e;border-radius:9px}
+.balance{font-size:27px;color:#36d99a;font-weight:bold;margin:15px 0}
+.notice{background:#26334a;padding:13px;border-radius:9px;color:#b8c6dc;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="container">
+  <button onclick="history.back()">← Back</button>
+
+  <div class="card">
+    <h2>REAL Account Withdrawal</h2>
+    <p>Available REAL balance</p>
+    <div class="balance" id="realBalance">Loading...</div>
+
+    <div class="notice">
+      Withdrawals are temporarily unavailable until secure
+      server-side balance verification and payment processing
+      are connected.
+    </div>
+
+    <label for="amount">Withdrawal amount (USD)</label>
+    <input id="amount" type="number" min="1" placeholder="Enter amount" disabled>
+
+    <p><button disabled>Withdraw</button></p>
+    <small>Demo balance cannot be withdrawn.</small>
+  </div>
+</div>
+
+<script>
+document.getElementById('realBalance').textContent =
+  'Not connected yet';
+</script>
+</body>
+</html>
