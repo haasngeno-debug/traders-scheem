@@ -245,6 +245,47 @@ renderDigits(); draw(); updPay(); updateBalDisplay();
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
+  <!-- MENU TRIGGER BUTTON -->
+<button onclick="toggleMenu()" class="menu-toggle-btn" aria-label="Open Menu">
+  <svg width="24" height="24" viewBox="0 0 24 24"
+       fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M3 12h18M3 6h18M3 18h18"></path>
+  </svg>
+</button>
+
+<!-- SIDE MENU -->
+<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
+
+<div id="sideMenu" class="side-menu">
+  <div class="menu-header">
+    <h3>Menu</h3>
+    <button onclick="toggleMenu()" class="close-btn">&times;</button>
+  </div>
+
+  <div class="menu-user-profile">
+    <div class="avatar-circle" id="userInitial">H</div>
+    <div class="user-details">
+      <b id="userNameDisplay">Hassan</b>
+      <small id="userEmailDisplay">Your account</small>
+    </div>
+  </div>
+
+  <div class="menu-items">
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="settings.html">⚙️ Account settings</a>
+    <a href="#" onclick="openDep(); toggleMenu(); return false;">💰 Deposit</a>
+    <a href="withdraw.html">⬆️ Withdraw</a>
+    <a href="history.html">🕒 Trade History</a>
+    <a href="refer.html">🎁 Refer &amp; Earn</a>
+
+    <div class="menu-divider"></div>
+
+    <a href="help.html">❓ Help Centre</a>
+    <a href="responsible-trading.html">🛡️ Responsible Trading</a>
+    <a href="contact.html">💬 Contact Us</a>
+    <a href="index.html" class="logout-link">🚪 Log out</a>
+  </div>
+</div>
 </script>
 </body>
                                                                                                                                                                                            </html>
