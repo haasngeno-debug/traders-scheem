@@ -739,16 +739,14 @@ function logoutUser() {
 
 loadTheme();
 loadSidebarUser();
-  
-
 function switchTab(button, tab) {
   const buyOptions = document.getElementById('buyOptions');
   if (!buyOptions) return;
 
   const options = {
     matches: [
-      ['MATCHES', 'Matches', '95.2%', 1.95],
-      ['DIFFERS', 'Differs', '95.2%', 1.95]
+      ['MATCHES', 'Matches', '10%', 9.5],
+      ['DIFFERS', 'Differs', '90%', 1.11]
     ],
     even: [
       ['EVEN', 'Even', '95.2%', 1.952],
@@ -762,14 +760,11 @@ function switchTab(button, tab) {
 
   if (!options[tab]) return;
 
-  // Remove active class from tab buttons
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.classList.remove('on');
-  });
+  // Remove 'on' class from all tab headers
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('on'));
+  if (button) button.classList.add('on');
 
-  button.classList.add('on');
-
-  // Generate the buy option buttons dynamically
+  // Render exactly 2 buttons inside #buyOptions
   buyOptions.innerHTML = options[tab].map((item, i) => `
     <button
       class="${i === 0 ? 'even' : 'odd'}"
@@ -788,8 +783,7 @@ function switchTab(button, tab) {
     </button>
   `).join('');
 
-  const selected = document.getElementById('selectedContract');
-  if (selected) selected.textContent = 'Choose an option';
+  updPay();
 }
 
 </script>
