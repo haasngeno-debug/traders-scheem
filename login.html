@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +21,7 @@ body {
   padding: 20px;
   font-family: Arial, sans-serif;
   color: white;
-  background:
-    radial-gradient(circle at top, #123052 0%, transparent 45%),
-    #041020;
+  background: radial-gradient(circle at top, #123052 0%, transparent 45%), #041020;
 }
 
 .login-card {
@@ -45,9 +42,7 @@ body {
   text-align: center;
 }
 
-.logo span {
-  color: white;
-}
+.logo span { color: white; }
 
 h1 {
   margin-bottom: 10px;
@@ -63,9 +58,7 @@ h1 {
   text-align: center;
 }
 
-.field {
-  margin-bottom: 18px;
-}
+.field { margin-bottom: 18px; }
 
 label {
   display: block;
@@ -86,10 +79,7 @@ input {
   font-size: 15px;
 }
 
-input:focus {
-  border-color: #00d9a0;
-  box-shadow: 0 0 0 3px rgba(0,217,160,0.12);
-}
+input:focus { border-color: #00d9a0; }
 
 .forgot-container {
   text-align: right;
@@ -97,11 +87,12 @@ input:focus {
   margin-bottom: 18px;
 }
 
-.forgot-link {
-  font-size: 13px;
+.forgot-link, a {
   color: #00d9a0;
   text-decoration: none;
 }
+
+.forgot-link { font-size: 13px; }
 
 .login-btn {
   width: 100%;
@@ -115,22 +106,11 @@ input:focus {
   cursor: pointer;
 }
 
-.login-btn:hover {
-  background: #00efb1;
-}
-
-.login-btn:disabled {
-  opacity: 0.65;
-  cursor: wait;
-}
-
 #message {
   min-height: 22px;
   margin-top: 16px;
   font-size: 13px;
-  line-height: 1.5;
   text-align: center;
-  overflow-wrap: anywhere;
 }
 
 .links {
@@ -139,15 +119,6 @@ input:focus {
   font-size: 14px;
   line-height: 2;
   text-align: center;
-}
-
-a {
-  color: #00d9a0;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 .footer {
@@ -160,7 +131,6 @@ a:hover {
 </head>
 
 <body>
-
 <main class="login-card">
 
   <div class="logo">Hassan<span>FX</span></div>
@@ -168,47 +138,34 @@ a:hover {
   <h1>Welcome Back</h1>
 
   <p class="subtitle">
-    Log in to your account to continue to your dashboard.
+    Enter your details to continue to the demo dashboard.
   </p>
 
   <form id="loginForm">
 
     <div class="field">
       <label for="email">Email address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        placeholder="Enter your email"
-        autocomplete="email"
-        required
-      >
+      <input id="email" type="email"
+        placeholder="Enter your email" required>
     </div>
 
     <div class="field">
       <label for="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-        required
-      >
+      <input id="password" type="password"
+        placeholder="Enter your password" required>
     </div>
 
     <div class="forgot-container">
-  <a href="forgot-password.html" class="forgot-link">
-    Forgot password?
-  </a>
+      <a href="forgot-password.html" class="forgot-link">
+        Forgot password?
+      </a>
     </div>
 
-    <button class="login-btn" id="loginBtn" type="submit">
+    <button class="login-btn" type="submit">
       LOGIN →
     </button>
 
-    <p id="message" role="status" aria-live="polite"></p>
-
+    <p id="message" role="status"></p>
   </form>
 
   <div class="links">
@@ -223,78 +180,16 @@ a:hover {
 </main>
 
 <script>
-const API_URL = "https://traderscheem-backend-pkn6.onrender.com";
-  
 const form = document.getElementById("loginForm");
 const message = document.getElementById("message");
-const loginBtn = document.getElementById("loginBtn");
 
-function showMessage(text, color) {
-  message.textContent = text;
-  message.style.color = color;
-}
-
-form.addEventListener("submit", async function(event) {
-
+form.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  message.textContent = "Opening demo dashboard...";
+  message.style.color = "#00d9a0";
 
-  if (!email || !password) {
-    showMessage("Please enter your email and password.", "#ff7777");
-    return;
-  }
-
-  loginBtn.disabled = true;
-  loginBtn.textContent = "PLEASE WAIT...";
-
-  showMessage("Checking login...", "#00d9a0");
-
-  try {
-
-    const response = await fetch(
-      API_URL + "/api/auth/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email: email,
-          password: password
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || data.message || "Invalid email or password.");
-    }
-
-    showMessage(
-      "Login successful! Opening dashboard...",
-      "#00d9a0"
-    );
-
-    setTimeout(function() {
-      window.location.href = "loading.html";
-    }, 700);
-
-  } catch(error) {
-
-    showMessage(
-      error.message || "Could not connect to the backend.",
-      "#ff7777"
-    );
-
-    loginBtn.disabled = false;
-    loginBtn.textContent = "LOGIN →";
-
-  }
-
+  window.location.href = "loading.html";
 });
 </script>
 
