@@ -245,13 +245,13 @@ footer {
 
 
 
+
 <script>
 (function () {
   const form = document.getElementById("signupForm");
   const message = document.getElementById("message");
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
-  const submitButton = form.querySelector('button[type="submit"]');
 
   const API_URL =
     "https://traderscheem-backend-pkn6.onrender.com";
@@ -260,10 +260,10 @@ footer {
   document.querySelectorAll(".toggle").forEach(function (button) {
     button.addEventListener("click", function () {
       const input = document.getElementById(button.dataset.target);
-      const show = input.type === "password";
+      const showPassword = input.type === "password";
 
-      input.type = show ? "text" : "password";
-      button.textContent = show ? "Hide" : "Show";
+      input.type = showPassword ? "text" : "password";
+      button.textContent = showPassword ? "Hide" : "Show";
     });
   });
 
@@ -272,10 +272,8 @@ footer {
 
     const fullName =
       document.getElementById("fullName").value.trim();
-
     const email =
       document.getElementById("email").value.trim().toLowerCase();
-
     const phone =
       document.getElementById("phone").value.trim();
 
@@ -286,10 +284,10 @@ footer {
       return;
     }
 
-    if (password.value.length < 10) {
+    if (password.value.length < 4) {
       message.style.color = "#ff8b8b";
       message.textContent =
-        "Password must be at least 10 characters.";
+        "Your password must be at least 4 characters.";
       return;
     }
 
@@ -300,9 +298,12 @@ footer {
       return;
     }
 
+    const submitButton = form.querySelector(
+      'button[type="submit"]'
+    );
+
     submitButton.disabled = true;
-    submitButton.textContent = "CREATING ACCOUNT...";
-    message.textContent = "";
+    submitButton.textContent = "SAVING DETAILS...";
 
     try {
       const response = await fetch(
@@ -327,32 +328,42 @@ footer {
       try {
         data = JSON.parse(responseText);
       } catch {
-        throw new Error(
-          "The server returned an invalid response."
-        );
+        throw new Error("Invalid server response.");
       }
 
       if (!response.ok) {
         throw new Error(
-          data.error || data.message || "Registration failed."
+          data.error || data.message || "Could not save account."
         );
       }
 
-      message.style.color = "#00d9a0";
-      message.textContent =
-        "Account created successfully! Opening login...";
+      // Save profile details locally as before.
+      const userData = {
+        fullName: fullName,
+        email: email,
+        phone: phone
+      };
+
+      localStorage.setItem(
+        "hassanfx_user",
+        JSON.stringify(userData)
+      );
 
       password.value = "";
       confirmPassword.value = "";
 
+      submitButton.textContent = "ACCOUNT READY...";
+      message.style.color = "#f5c94b";
+      message.textContent =
+        "Details saved! Opening the loading screen...";
+
       setTimeout(function () {
-        window.location.href = "login.html";
-      }, 1200);
+        window.location.href = "loading.html";
+      }, 500);
 
     } catch (error) {
       message.style.color = "#ff8b8b";
-      message.textContent =
-        error.message || "Could not connect to the server.";
+      message.textContent = error.message;
 
       submitButton.disabled = false;
       submitButton.textContent = "CONTINUE →";
@@ -360,8 +371,6 @@ footer {
   });
 })();
 </script>
-
-
 
 </body>
 </html>
