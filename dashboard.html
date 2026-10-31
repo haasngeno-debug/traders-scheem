@@ -710,24 +710,25 @@ function logoutUser() {
 loadTheme();
 loadSidebarUser();
   
+
 function switchTab(button, tab) {
   const buyOptions = document.getElementById('buyOptions');
 
-  if (!buyOptions) {
-    console.error('Could not find buyOptions');
-    return;
-  }
+  if (!buyOptions) return;
 
   const options = {
-    matches: ['Matches', 'Differs'],
-    even: ['Even', 'Odd'],
-    over: ['Over', 'Under']
-  };
-
-  const actions = {
-    matches: ['MATCHES', 'DIFFERS'],
-    even: ['EVEN', 'ODD'],
-    over: ['OVER', 'UNDER']
+    matches: [
+      ['MATCHES', 'Matches', '95.2%', 1.952],
+      ['DIFFERS', 'Differs', '95.2%', 1.952]
+    ],
+    even: [
+      ['EVEN', 'Even', '95.2%', 1.952],
+      ['ODD', 'Odd', '95.2%', 1.952]
+    ],
+    over: [
+      ['OVER', 'Over', '90%', 1.90],
+      ['UNDER', 'Under', '90%', 1.90]
+    ]
   };
 
   if (!options[tab]) return;
@@ -738,11 +739,22 @@ function switchTab(button, tab) {
 
   button.classList.add('on');
 
-  buyOptions.innerHTML = options[tab].map((name, i) => `
-    <button class="${i === 0 ? 'even' : 'odd'}"
-      onclick="selectOption('${actions[tab][i]}', this)">
-      <b>${name}</b>
-      <small>Choose contract</small>
+  buyOptions.innerHTML = options[tab].map((item, i) => `
+    <button
+      class="${i === 0 ? 'even' : 'odd'}"
+      data-option="${item[0]}"
+      data-rate="${item[3]}"
+      onclick="selectOption('${item[0]}', this)">
+
+      <b>${item[1]}</b>
+      <small>${item[2]}</small>
+
+      <div class="pr">
+        <b>$${Number(stake).toFixed(2)}</b>
+        <br>
+        <small>Payout</small>
+        <b>$${(stake * item[3]).toFixed(2)}</b>
+      </div>
     </button>
   `).join('');
 
@@ -758,10 +770,12 @@ function selectOption(option, button) {
   if (button) button.classList.add('selected');
 
   const selected = document.getElementById('selectedContract');
+
   if (selected) {
     selected.textContent = 'Selected: ' + option;
   }
 }
+
 </script>
 
 </body>
