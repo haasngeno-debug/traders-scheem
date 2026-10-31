@@ -245,6 +245,56 @@ renderDigits(); draw(); updPay(); updateBalDisplay();
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
+  <!-- Side Menu Overlay -->
+<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
+
+<!-- Side Menu Drawer -->
+<div id="sideMenu" class="side-menu">
+
+  <div class="menu-header">
+    <div class="menu-brand">
+      <div class="menu-logo">T</div>
+      <div>
+        <b>TradersCheem</b>
+        <small>Trading Dashboard</small>
+      </div>
+    </div>
+    <button class="close-btn" onclick="toggleMenu()">×</button>
+  </div>
+
+  <div class="menu-user-profile">
+    <div class="avatar-circle" id="userInitial">H</div>
+    <div class="user-details">
+      <b id="userNameDisplay">hassanngeno</b>
+      <small id="userEmailDisplay">hassanngeno@gmail.com</small>
+      <span class="demo-label">DEMO ACCOUNT</span>
+    </div>
+  </div>
+
+  <div class="menu-section-title">MAIN MENU</div>
+
+  <div class="menu-items">
+    <a href="dashboard.html">📊 <span>Dashboard</span></a>
+    <a href="settings.html">⚙️ <span>Settings</span></a>
+    <a href="#" onclick="toggleMenu();openDep();return false;">💰 <span>Deposit</span></a>
+    <a href="withdraw.html">⬆️ <span>Withdraw</span></a>
+    <a href="history.html">🕒 <span>Trade History</span></a>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-section-title">SUPPORT</div>
+    <a href="help.html">❓ <span>Help Centre</span></a>
+    <a href="responsible-trading.html">🛡️ <span>Demo Trading Guide</span></a>
+    <a href="contact.html">💬 <span>Contact Us</span></a>
+    <a href="refer.html">🎁 <span>Refer & Earn</span></a>
+
+    <div class="menu-divider"></div>
+
+    <a href="index.html" class="logout-link">🚪 <span>Log Out</span></a>
+  </div>
+
+  <div class="menu-footer">TradersCheem © 2026</div>
+</div>
 </script>
 </body>
                                             </html>
