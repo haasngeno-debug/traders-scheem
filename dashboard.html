@@ -525,7 +525,7 @@ function changeStake(d){stake=Math.max(1,stake+d); document.getElementById('stak
 function editStake(){let v=prompt('Enter Stake $', stake); if(v){stake=parseInt(v); document.getElementById('stake').innerText=stake; updPay();}}
 function setMode(m){autoMode=m==='AUTO'; document.getElementById('autoB').className=autoMode?'on':''; document.getElementById('manB').className=!autoMode?'on':'';}
 function doTrade(dir) {
-  // Demo simulation only
+  // Virtual demo simulator only
   if (mode !== 'demo') {
     alert('Please switch to Demo Account.');
     return;
@@ -539,13 +539,28 @@ function doTrade(dir) {
   const digit = lastD;
   const tradeStake = stake;
 
-  const win =
-    (dir === 'EVEN' && digit % 2 === 0) ||
-    (dir === 'ODD' && digit % 2 === 1);
+  let win = false;
 
-  let tradeProfit = 0;
+  if (dir === 'EVEN') {
+    win = digit % 2 === 0;
+  } else if (dir === 'ODD') {
+    win = digit % 2 !== 0;
+  } else if (dir === 'MATCHES') {
+    win = digit === selectedDigit;
+  } else if (dir === 'DIFFERS') {
+    win = digit !== selectedDigit;
+  } else if (dir === 'OVER') {
+    win = digit > selectedDigit;
+  } else if (dir === 'UNDER') {
+    win = digit < selectedDigit;
+  } else {
+    alert('Please select a valid demo option.');
+    return;
+  }
 
   balances.demo -= tradeStake;
+
+  let tradeProfit = 0;
 
   if (win) {
     tradeProfit = tradeStake * 0.952;
@@ -559,50 +574,19 @@ function doTrade(dir) {
 
   total++;
 
-  // Save demo trade history
-  let history = [];
-
-  try {
-    history = JSON.parse(
-      localStorage.getItem('tradeHistory') || '[]'
-    );
-    if (!Array.isArray(history)) history = [];
-  } catch (error) {
-    history = [];
-  }
-
-  history.unshift({
-    id: Date.now(),
-    account: 'demo',
-    pair: 'Vol 10 (1s)',
-    direction: dir,
-    stake: tradeStake,
-    result: win ? 'win' : 'loss',
-    profit: Number(tradeProfit.toFixed(2)),
-    digit: digit,
-    date: new Date().toISOString()
-  });
-
-  localStorage.setItem('tradeHistory', JSON.stringify(history));
-
   document.getElementById('profit').innerText =
     (profit >= 0 ? '+$' : '-$') + Math.abs(profit).toFixed(2);
-
-  document.getElementById('profit').style.color =
-    profit >= 0 ? '#10B981' : '#ef4444';
 
   document.getElementById('lastInfo').innerText =
     `LAST ${total}T · ${wins}W · ${losses}L [DEMO]`;
 
   updateBalDisplay();
 
-  if (autoMode && total < 100) {
-    setTimeout(() => {
-      if (mode === 'demo') {
-        doTrade(Math.random() > 0.5 ? 'EVEN' : 'ODD');
-      }
-    }, 1500);
-  }
+  alert(
+    win
+      ? 'Demo result: WIN'
+      : 'Demo result: LOSS'
+  );
   }
 function pickDigit(i){lastD=i; renderDigits();}
 renderDigits(); draw(); updPay(); updateBalDisplay();
