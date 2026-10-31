@@ -714,14 +714,32 @@ function logoutUser() {
 
 loadTheme();
 loadSidebarUser();
-  function switchTab(button, tabName) {
+  function switchTab(button, tab) {
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.remove('on');
   });
 
   button.classList.add('on');
 
-  console.log('Selected tab:', tabName);
+  const options = {
+    matches: ['Matches', 'Differs'],
+    even: ['Even', 'Odd'],
+    over: ['Over', 'Under']
+  };
+
+  const colors = ['even', 'odd'];
+
+  document.getElementById('buyOptions').innerHTML =
+    options[tab].map((name, index) => `
+      <button class="${colors[index]}" onclick="selectOption('${name.toUpperCase()}')">
+        <b>${name}</b>
+        <small>Demo option</small>
+      </button>
+    `).join('');
+}
+
+function selectOption(option) {
+  alert(option + ' selected. Demo interface only.');
   }
 </script>
 
