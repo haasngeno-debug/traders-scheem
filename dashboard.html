@@ -423,31 +423,14 @@ onclick="window.open('https://wa.me/254114622873', '_blank')">
 
 <div class="last"><span id="lastInfo">LAST  0T · 0W · 0L [DEMO]</span><b id="profit">+$0.00</b></div>
 
-<div class="buy" id="buyOptions">
-  <button class="even" onclick="selectOption('MATCHES')">
-    <b>Matches</b>
-    <small>95.2%</small>
-    <div class="pr"><b id="pe">$19.52</b><br><small>Payout</small></div>
-  </button>
-
-  <!-- Differs Button -->
-  <button class="odd" onclick="selectOption('DIFFERS', this)" data-option="DIFFERS">
-    <b>Differs</b>
-    <small>90%</small>
-    <div class="pr">
-      <b id="po">$11.10</b><br>
-      <small>Payout</small>
-    </div>
-  </button>
+<div class="tabs">
+  <button onclick="switchTab(this, 'matches')" class="on">Matches/Differs</button>
+  <button onclick="switchTab(this, 'even')">Even/Odd</button>
+  <button onclick="switchTab(this, 'over')">Over/Under</button>
 </div>
 
+<div class="buy" id="buyOptions"></div>
 
-  <button class="odd" onclick="selectOption('DIFFERS')">
-    <b>Differs</b>
-    <small>95.2%</small>
-    <div class="pr"><b id="po">$19.52</b><br><small>Payout</small></div>
-  </button>
-</div>
 
 <div class="bottom">
   <div class="on"><div style="font-size:22px">📊</div>Trade</div>
