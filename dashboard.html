@@ -610,6 +610,7 @@ function showInfo(title, message) {
   document.getElementById('infoModal').classList.add('open');
 }
 
+
 function menuAction(action) {
   closeSideMenu();
 
@@ -620,17 +621,18 @@ function menuAction(action) {
   } else if (action === 'history') {
     window.location.href = 'history.html';
   } else if (action === 'settings') {
-  window.location.href = 'settings.html';
+    window.location.href = 'settings.html';
   } else if (action === 'referral') {
     showInfo('Refer & Earn', 'Referral rewards will be available soon.');
   } else if (action === 'help') {
     showInfo('Help Centre', 'Please contact our support team for assistance.');
   } else if (action === 'responsible') {
-    showInfo('Responsible Trading', 'Trade carefully and understand the risks.');
+    window.location.href = 'responsible-trading.html';
   } else if (action === 'chat') {
     showInfo('Live Chat', 'Live chat will be available soon.');
   }
 }
+
 
 function toggleTheme() {
   document.body.classList.toggle('light');
