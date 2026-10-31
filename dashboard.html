@@ -731,13 +731,12 @@ loadSidebarUser();
 
 function switchTab(button, tab) {
   const buyOptions = document.getElementById('buyOptions');
-
   if (!buyOptions) return;
 
   const options = {
     matches: [
-      ['MATCHES', 'Matches', '95.2%', 1.952],
-      ['DIFFERS', 'Differs', '95.2%', 1.952]
+      ['MATCHES', 'Matches', '95.2%', 1.95],
+      ['DIFFERS', 'Differs', '95.2%', 1.95]
     ],
     even: [
       ['EVEN', 'Even', '95.2%', 1.952],
@@ -751,12 +750,14 @@ function switchTab(button, tab) {
 
   if (!options[tab]) return;
 
+  // Remove active class from tab buttons
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.remove('on');
   });
 
   button.classList.add('on');
 
+  // Generate the buy option buttons dynamically
   buyOptions.innerHTML = options[tab].map((item, i) => `
     <button
       class="${i === 0 ? 'even' : 'odd'}"
@@ -768,30 +769,15 @@ function switchTab(button, tab) {
       <small>${item[2]}</small>
 
       <div class="pr">
-        <b>$${Number(stake).toFixed(2)}</b>
+        <b id="${i === 0 ? 'pe' : 'po'}">$${(stake * item[3]).toFixed(2)}</b>
         <br>
         <small>Payout</small>
-        <b>$${(stake * item[3]).toFixed(2)}</b>
       </div>
     </button>
   `).join('');
 
   const selected = document.getElementById('selectedContract');
   if (selected) selected.textContent = 'Choose an option';
-}
-
-function selectOption(option, button) {
-  document.querySelectorAll('#buyOptions button').forEach(btn => {
-    btn.classList.remove('selected');
-  });
-
-  if (button) button.classList.add('selected');
-
-  const selected = document.getElementById('selectedContract');
-
-  if (selected) {
-    selected.textContent = 'Selected: ' + option;
-  }
 }
 
 </script>
