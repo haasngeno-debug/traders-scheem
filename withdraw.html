@@ -4,44 +4,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real Account Withdrawal | TradersCheeem</title>
+<meta name="theme-color" content="#080f1e">
+<title>Withdraw Funds | TradersCheeem</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;padding:20px;background:#080f1e;color:white;font-family:Arial}
-.container{max-width:480px;margin:auto}
-.card{background:#172236;padding:22px;border-radius:14px;margin-top:25px}
-button{padding:12px 18px;border:0;border-radius:9px;background:#3478ed;color:white}
-input{width:100%;padding:14px;margin-top:10px;background:#0c1628;color:white;border:1px solid #34445e;border-radius:9px}
-.balance{font-size:27px;color:#36d99a;font-weight:bold;margin:15px 0}
-.notice{background:#26334a;padding:13px;border-radius:9px;color:#b8c6dc;line-height:1.5}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080f1e;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+}
+
+.card {
+  background: #202438;
+  border: 1px solid #30364b;
+  border-radius: 23px;
+  overflow: hidden;
+}
+
+.header {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #30364b;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+.header p {
+  color: #9299ad;
+  margin-bottom: 0;
+}
+
+.close {
+  background: transparent;
+  color: #9299ad;
+  font-size: 30px;
+  padding: 5px;
+}
+
+.content {
+  padding: 25px;
+}
+
+.back {
+  background: transparent;
+  color: #aab2c4;
+  padding: 5px 0;
+  margin-bottom: 25px;
+  font-size: 17px;
+}
+
+label {
+  display: block;
+  color: #aab2c4;
+  margin-bottom: 12px;
+}
+
+input {
+  width: 100%;
+  padding: 19px;
+  background: #171b29;
+  color: white;
+  border: 1px solid #30364b;
+  border-radius: 16px;
+  font-size: 19px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #3478ed;
+}
+
+.limit {
+  color: #9299ad;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+h4 {
+  margin-top: 28px;
+  margin-bottom: 18px;
+}
+
+.phone-group {
+  display: flex;
+  background: #171b29;
+  border: 1px solid #30364b;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.country-code {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #26334a;
+  font-weight: bold;
+  font-size: 19px;
+  border-right: 1px solid #30364b;
+}
+
+.phone-group input {
+  border: none;
+  border-radius: 0;
+  min-width: 0;
+}
+
+.hint {
+  color: #9299ad;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.notice {
+  background: #26334a;
+  padding: 13px;
+  border-radius: 10px;
+  color: #b8c6dc;
+  line-height: 1.5;
+  margin-top: 22px;
+}
+
+.withdraw-btn {
+  width: 100%;
+  padding: 22px;
+  margin-top: 22px;
+  background: linear-gradient(100deg,#3985f7,#2360e9);
+  color: white;
+  border: 0;
+  border-radius: 16px;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.withdraw-btn:active {
+  transform: scale(.98);
+}
+
+small {
+  display: block;
+  color: #9299ad;
+  margin-top: 15px;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 9px;
+}
+
+@media(max-width:480px) {
+  .content, .header {
+    padding: 22px;
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
-  <button onclick="history.back()">← Back</button>
 
   <div class="card">
-    <h2>REAL Account Withdrawal</h2>
-    <p>Available REAL balance</p>
-    <div class="balance" id="realBalance">Loading...</div>
 
-    <div class="notice">
-      Withdrawals are temporarily unavailable until secure
-      server-side balance verification and payment processing
-      are connected.
+    <div class="header">
+      <div>
+        <h2>Withdraw Funds</h2>
+        <p>Balance: $<span id="realBalance">0.00</span></p>
+      </div>
+
+      <button class="close" onclick="history.back()">×</button>
     </div>
 
-    <label for="amount">Withdrawal amount (USD)</label>
-    <input id="amount" type="number" min="1" placeholder="Enter amount" disabled>
+    <div class="content">
 
-    <p><button disabled>Withdraw</button></p>
-    <small>Demo balance cannot be withdrawn.</small>
+      <button class="back" onclick="history.back()">
+        ← Back
+      </button>
+
+      <label for="amount">Amount (USD)</label>
+
+      <input
+        id="amount"
+        type="number"
+        min="1"
+        max="1900"
+        step="0.01"
+        placeholder="0.00"
+      >
+
+      <p class="limit">Min: $1 • Max: $1,900</p>
+
+      <h4>M-Pesa</h4>
+
+      <label for="phone">M-Pesa phone number</label>
+
+      <div class="phone-group">
+        <span class="country-code">+254</span>
+
+        <input
+          id="phone"
+          type="tel"
+          placeholder="7XXXXXXXX"
+          maxlength="9"
+          inputmode="numeric"
+          autocomplete="tel-national"
+        >
+      </div>
+
+      <p class="hint">
+        Enter the M-Pesa number you want to receive your withdrawal.
+      </p>
+
+      <div class="notice">
+        Enter your withdrawal details below. Actual withdrawals
+        require secure server-side balance verification and
+        payment processing.
+      </div>
+
+      <button class="withdraw-btn" onclick="requestWithdrawal()">
+        Withdraw
+      </button>
+
+      <small>Only REAL account funds are eligible for withdrawal.</small>
+
+    </div>
   </div>
+
 </div>
 
 <script>
-document.getElementById('realBalance').textContent =
-  'Not connected yet';
+
+// Close and back buttons
+// Return to the previous page.
+
+function requestWithdrawal() {
+
+  const amount = Number(
+    document.getElementById('amount').value
+  );
+
+  const phone = document.getElementById('phone').value.trim();
+
+  if (!Number.isFinite(amount) || amount < 1 || amount > 1900) {
+    alert('Enter an amount between $1 and $1,900.');
+    return;
+  }
+
+  if (!/^[17][0-9]{8}$/.test(phone)) {
+    alert('Enter a valid Kenyan M-Pesa number.');
+    return;
+  }
+
+  const fullPhone = '+254' + phone;
+
+  alert(
+    'Withdrawal details accepted.\n\n' +
+    'Amount: $' + amount.toFixed(2) + '\n' +
+    'M-Pesa: ' + fullPhone +
+    '\n\nPayment processing is not connected yet.'
+  );
+
+}
+
 </script>
+
 </body>
 </html>
