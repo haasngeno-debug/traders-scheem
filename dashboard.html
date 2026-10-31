@@ -626,5 +626,37 @@ function logoutUser() {
 loadTheme();
 loadSidebarUser();
 </script>
+  <p id="backendStatus">Checking backend...</p>
+
+<script>
+  const BACKEND_URL =
+    "https://traderscheem-backend-pkn6.onrender.com";
+
+  async function checkBackend() {
+    const status = document.getElementById("backendStatus");
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/health`);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      status.textContent = "Backend connected";
+      status.style.color = "green";
+
+      console.log(data);
+    } catch (error) {
+      status.textContent = "Backend connection failed";
+      status.style.color = "red";
+
+      console.error(error);
+    }
+  }
+
+  checkBackend();
+</script>
 </body>
 </html>
