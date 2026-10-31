@@ -367,7 +367,9 @@ body.light .menu-head .menu-close{color:#172033}
 
     <button class="menu-item" onclick="menuAction('responsible')">♧ Responsible Trading</button>
 
-    <button class="menu-item" onclick="menuAction('chat')">▢ Live Chat</button>
+    } else if (action === 'chat') {
+  window.open('https://wa.me/254114622873', '_blank');
+}
 
     <button class="menu-item logout-item" onclick="logoutUser()">⇥ Log out</button>
       </div>
