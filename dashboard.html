@@ -1,117 +1,230 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Vol 10 (1s) - Demo/Real</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>TradersCheem | Dashboard</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif}
-body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
-.top{height:56px;background:#151D2E;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-bottom:1px solid #1E293B;position:sticky;top:0;z-index:20}
-.top-l{display:flex;align-items:center;gap:10px}
-.ham{width:20px;height:2px;background:#94a3b8;box-shadow:0 6px 0 #94a3b8,0 -6px 0 #94a3b8;cursor:pointer}
-.t{width:34px;height:34px;background:#FF4D5A;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
-.dep-left{background:#3B82F6;border:none;color:#fff;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:800;cursor:pointer}
-.bal-wrap{position:relative}
-.rbal{background:#1C2538;border-radius:20px;padding:5px 10px;display:flex;align-items:center;gap:6px;border:1px solid #243044;cursor:pointer;min-width:95px;justify-content:center}
-.rbal .r{width:26px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff}
-.rbal .r.demo{background:#FF4D5A}.rbal .r.real{background:#3B82F6}
-.rbal b{font-size:12px}
-.bal-dropdown{position:absolute;top:40px;right:0;width:220px;background:#151D2E;border:1px solid #1E293B;border-radius:14px;z-index:100;display:none;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.5)}
-.bal-dropdown.open{display:block}
-.acc-opt{padding:12px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid #1E293B}
-.acc-opt:last-child{border-bottom:none}
-.acc-opt:hover{background:#1C2538}
-.acc-opt .left{display:flex;align-items:center;gap:8px}
-.acc-opt .circle{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff}
-.acc-opt .circle.demo{background:#FF4D5A}.acc-opt .circle.real{background:#3B82F6}
-.acc-opt b{font-size:12px;display:block}.acc-opt small{font-size:10px;color:#94a3b8}
-.acc-opt.on{background:#1E2F4A}
-.reset-btn{margin:8px;background:#1C2538;border:1px solid #243044;border-radius:8px;padding:8px;text-align:center;font-size:11px;color:#94a3b8;cursor:pointer}
-.reset-btn:hover{color:#fff;border-color:#3B82F6}
-.tabs{height:50px;display:flex;align-items:center;gap:8px;padding:0 10px;background:#0A101E;border-bottom:1px solid #121A2B;overflow-x:auto}
-.tabs button{border:none;background:#121A2B;color:#5B6B85;font-size:13px;font-weight:600;padding:9px 14px;border-radius:20px;white-space:nowrap;cursor:pointer}
-.tabs .on{background:#1C2538;color:#fff;border:1px solid #2A3650}
-.vol-row{padding:10px;display:flex;justify-content:space-between;align-items:flex-start}
-.vol-box{background:#151D2E;border:1px solid #1E293B;border-radius:12px;padding:8px 12px;display:flex;align-items:center;gap:8px;min-width:150px;cursor:pointer}
-.p100{background:#151D2E;border:1px solid #1E293B;border-radius:8px;padding:8px 14px;font-size:12px;color:#94a3b8;cursor:pointer}
-.chart{position:relative;width:100%;height:480px;background:#0A101E;overflow:hidden;border-top:1px solid #121A2B}
-#cv{width:100%;height:100%}
-.price-scale{position:absolute;right:0;top:10px;bottom:26px;width:68px;display:flex;flex-direction:column;justify-content:space-between;padding:5px 6px 10px 0;text-align:right;font-size:10px;color:#3B4A64;pointer-events:none}
-.price-tag{position:absolute;right:0;background:#0A2A2A;border:1px solid #10B981;color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px;transform:translateY(-50%);z-index:2}
-.time-row{position:absolute;bottom:0;left:0;right:68px;height:24px;display:flex;justify-content:space-between;padding:4px 10px;font-size:10px;color:#3B4A64;border-top:1px solid #121A2B;background:#0A101E}
-.zoom{position:absolute;left:10px;bottom:32px;display:flex;flex-direction:column;gap:6px;z-index:3}
-.zoom button{width:38px;height:38px;background:#151D2E;border:1px solid #1E293B;border-radius:12px;color:#94a3b8;font-size:20px;cursor:pointer}
-.digits{height:72px;background:#0A101E;border-top:1px solid #121A2B;border-bottom:1px solid #121A2B;display:flex;align-items:center;padding:0 6px;gap:2px;overflow-x:auto}
-.di{flex:1;min-width:48px;text-align:center;position:relative;padding-top:4px;cursor:pointer}
-.di .circle{width:40px;height:40px;border-radius:50%;border:2px solid #1E293B;margin:0 auto;display:flex;align-items:center;justify-content:center;background:#0F182A}
-.di .circle.sel{border-color:#3B82F6;box-shadow:0 0 0 1px #3B82F6}
-.di .tri{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #EAB308;display:none}
-.di.sel .tri{display:block}
-.di small.perc{font-size:9px;color:#94a3b8;margin-top:4px;display:block}
-.switch{margin:12px;background:#151D2E;border-radius:12px;display:flex;overflow:hidden;height:42px;border:1px solid #1E293B}
-.switch button{flex:1;border:none;background:transparent;color:#5B6B85;font-size:11px;font-weight:800;letter-spacing:1px;cursor:pointer}
-.switch .on{background:#3B82F6;color:#fff}
-.stake-wrap{margin:0 12px;background:#111A2E;border:1.5px solid #3B82F6;border-radius:14px;height:62px;display:flex;align-items:center;padding:0 6px;gap:8px}
-.stake-wrap button{width:44px;height:44px;background:#151D2E;border:none;border-radius:10px;color:#94a3b8;font-size:18px;cursor:pointer}
-.stake-mid{flex:1;text-align:center;position:relative;cursor:pointer}
-.stake-mid label{font-size:9px;color:#3B82F6;letter-spacing:1px;font-weight:800;display:block}
-.stake-mid b{font-size:22px;font-weight:800;display:block;margin-top:2px}
-.stake-mid i{position:absolute;left:10px;top:30px;color:#3B82F6;font-style:normal;font-size:14px;font-weight:800}
-.chips{display:flex;gap:6px;margin:10px 12px}
-.chips span{flex:1;background:#151D2E;border:1px solid #1E293B;border-radius:8px;padding:9px 0;text-align:center;font-size:11px;color:#5B6B85;font-weight:600;cursor:pointer}
-.chips .on{background:#1E2F4A;border-color:#3B82F6;color:#60A5FA}
-.boxes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:0 12px}
-.box{background:#151D2E;border:1px solid #1E293B;border-radius:12px;padding:12px 8px;text-align:center}
-.box label{font-size:9px;font-weight:800;display:block;margin-bottom:6px}
-.box.green label{color:#22c55e}.box.red label{color:#ef4444}.box.yellow label{color:#EAB308}
-.box input{font-size:14px;font-weight:800;background:transparent;border:none;color:#fff;text-align:center;width:100%;outline:none}
-.last{margin:10px 12px;background:#151D2E;border:1px solid #1E293B;border-radius:10px;padding:12px;display:flex;justify-content:space-between;align-items:center}
-.last span{font-size:10px;color:#5B6B85;font-weight:700}
-.last b{color:#10B981;font-size:15px;font-weight:800}
-.buy{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 12px 14px}
-.buy button{border:none;border-radius:16px;height:66px;padding:12px 14px;text-align:left;position:relative;cursor:pointer}
-.buy .even{background:#10B981}.buy .odd{background:#EF4444}
-.buy b{font-size:16px;font-weight:800;display:block;color:#fff}
-.buy small{font-size:11px;color:rgba(255,255,255,0.7);display:block}
-.buy .pr{position:absolute;right:14px;top:14px;text-align:right}
-.bottom{position:fixed;bottom:0;left:0;right:0;height:74px;background:#151D2E;border-top:1px solid #1E293B;display:flex;justify-content:space-around;align-items:center;z-index:20}
-.bottom div{text-align:center;color:#5B6B85;font-size:10px;font-weight:600;cursor:pointer}
-.bottom .on{color:#3B82F6}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
-.modal.open{display:flex}
-.modal-box{background:#151D2E;border:1px solid #1E293B;border-radius:16px;width:100%;max-width:340px;padding:20px}
-.modal-box h3{font-size:14px;margin-bottom:12px}
-.modal-box input{width:100%;background:#0A101E;border:1px solid #1E293B;border-radius:10px;padding:12px;color:#fff;font-size:14px;margin-bottom:12px}
-.modal-box button{width:100%;background:#3B82F6;border:none;border-radius:10px;padding:12px;color:#fff;font-weight:800;cursor:pointer}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#07111f;color:#fff;
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+}
+.top{
+  height:65px;background:#111d30;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 15px;border-bottom:1px solid #26344b;
+  position:sticky;top:0;z-index:10;
+}
+.top-left{display:flex;align-items:center;gap:13px}
+.ham{
+  width:40px;height:40px;border:1px solid #334155;
+  border-radius:9px;background:#1b2a40;color:white;
+  font-size:23px;cursor:pointer;
+}
+.logo{
+  width:35px;height:35px;background:#2878ed;
+  border-radius:9px;display:grid;place-items:center;
+  font-weight:bold;font-size:20px;
+}
+.brand{font-weight:bold;font-size:15px}
+.demo-tag{
+  color:#60a5fa;background:#172d4d;
+  padding:7px 10px;border-radius:7px;font-size:11px;
+}
+.container{padding:18px;max-width:900px;margin:auto}
+h2{font-size:21px;margin-bottom:8px}
+.muted{color:#94a3b8;font-size:13px}
+.balance-card{
+  background:linear-gradient(120deg,#123c78,#1765c7);
+  padding:22px;border-radius:15px;margin-top:20px;
+}
+.balance-card small{color:#dbeafe}
+.balance{
+  font-size:30px;font-weight:bold;margin:12px 0;
+}
+.account-label{font-size:11px;color:#dbeafe}
+.grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-top:18px;
+}
+.panel{
+  background:#111d30;border:1px solid #26344b;
+  padding:18px;border-radius:13px;
+}
+.panel h3{font-size:14px;margin-bottom:12px}
+.panel p{font-size:20px;font-weight:bold}
+.demo-note{
+  background:#17243a;border:1px solid #334155;
+  color:#cbd5e1;padding:14px;border-radius:10px;
+  font-size:12px;line-height:1.6;margin-top:18px;
+}
+button.action{
+  border:0;border-radius:8px;padding:12px 15px;
+  color:white;background:#2878ed;font-weight:bold;
+  cursor:pointer;margin-top:15px;
+}
+.menu-overlay{
+  position:fixed;inset:0;background:#000a;
+  z-index:20;display:none;
+}
+.menu-overlay.open{display:block}
+.side-menu{
+  position:fixed;top:0;left:0;width:290px;
+  max-width:85%;height:100%;background:#111d30;
+  border-right:1px solid #334155;z-index:30;
+  transform:translateX(-105%);
+  transition:transform .25s ease;
+  overflow-y:auto;padding-bottom:20px;
+}
+.side-menu.open{transform:translateX(0)}
+.menu-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:17px;border-bottom:1px solid #26344b;
+}
+.menu-brand{display:flex;align-items:center;gap:10px}
+.menu-brand small{
+  display:block;color:#94a3b8;font-size:10px;margin-top:4px;
+}
+.close-btn{
+  background:#26344b;color:white;border:0;
+  width:34px;height:34px;border-radius:8px;
+  font-size:23px;cursor:pointer;
+}
+.profile{
+  margin:15px;padding:14px;background:#0b1728;
+  border:1px solid #26344b;border-radius:12px;
+  display:flex;align-items:center;gap:12px;
+}
+.avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:#2878ed;display:grid;place-items:center;
+  font-weight:bold;
+}
+.profile small{display:block;color:#94a3b8;margin-top:5px}
+.section{
+  padding:13px 17px 7px;color:#64748b;
+  font-size:10px;font-weight:bold;letter-spacing:1px;
+}
+.menu-items{padding:0 10px}
+.menu-items a{
+  display:flex;align-items:center;gap:12px;
+  min-height:44px;padding:0 13px;margin:3px 0;
+  border-radius:9px;text-decoration:none;
+  color:#cbd5e1;font-size:13px;
+}
+.menu-items a:hover{background:#26344b;color:white}
+.menu-divider{height:1px;background:#26344b;margin:12px 5px}
+.logout{color:#f87171!important}
+.menu-footer{
+  text-align:center;color:#64748b;
+  font-size:10px;padding:20px;
+}
+@media(max-width:480px){
+  .container{padding:14px}
+  .balance{font-size:26px}
+}
 </style>
 </head>
+
 <body>
 
 <div class="top">
-  <div class="top-l">
-  <button onclick="toggleMenu()" class="ham" aria-label="Open Menu">☰</button>
-  <div class="t">T</div>
-  <button class="dep-left" onclick="openDep()">Deposit</button>
+  <div class="top-left">
+    <button class="ham" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+    <div class="logo">T</div>
+    <div class="brand">TradersCheem</div>
   </div>
-  <div class="bal-wrap">
-    <div class="rbal" id="balBtn" onclick="toggleBal()"><div class="r demo" id="balIcon">D</div><b id="balText" style="color:#FF4D5A">$ 10,000</b><span style="font-size:10px;color:#5B6B85">▼</span></div>
-    <div class="bal-dropdown" id="balDrop">
-      <div class="acc-opt on" id="demoOpt" onclick="switchAcc('demo')">
-        <div class="left"><div class="circle demo">D</div><div><b>DEMO Account</b><small id="demoBalTxt">$10,000.00</small></div></div><span style="color:#3B82F6">✓</span>
-      </div>
-      <div class="acc-opt" id="realOpt" onclick="switchAcc('real')">
-        <div class="left"><div class="circle real">R</div><div><b>REAL Account</b><small id="realBalTxt">$0.00</small></div></div><span></span>
-      </div>
-      <div class="reset-btn" onclick="resetDemo()">🔄 Reset Demo Balance to $10,000</div>
-    </div>
-  </div>
+  <span class="demo-tag">DEMO ACCOUNT</span>
 </div>
 
-<div class="tabs"><button>◎ Matches/Differs</button><button class="on">⊞ Even/Odd</button><button>⇅ Over/Under</button></div>
+<!-- SIDE MENU -->
+<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
 
-<div class="vol-row">
-  <div class="vol-box"><div style="background:#1A2538;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#3B82F6">📊</div><div><b>Vol 10 (1s)</b><small><span id="volPrice">9362.02</span> <small style="color:#ef4444">-1.45%</small></small></div><span style="color:#5B6B85;font-size:12px">▼</span></div>
+<aside id="sideMenu" class="side-menu">
+  <div class="menu-header">
+    <div class="menu-brand">
+      <div class="logo">T</div>
+      <div>
+        <b>TradersCheem</b>
+        <small>Demo Dashboard</small>
+      </div>
+    </div>
+    <button class="close-btn" onclick="toggleMenu()">×</button>
+  </div>
+
+  <div class="profile">
+    <div class="avatar">H</div>
+    <div>
+      <b>Demo User</b>
+      <small>DEMO ACCOUNT</small>
+    </div>
+  </div>
+
+  <div class="section">MAIN MENU</div>
+  <nav class="menu-items">
+    <a href="dashboard.html">📊 Dashboard</a>
+    <a href="settings.html">⚙️ Settings</a>
+    <a href="history.html">🕒 Trade History</a>
+    <a href="help.html">❓ Help Centre</a>
+    <div class="menu-divider"></div>
+    <div class="section">SUPPORT</div>
+    <a href="contact.html">💬 Contact Us</a>
+    <a href="responsible-trading.html">🛡️ Demo Trading Guide</a>
+    <div class="menu-divider"></div>
+    <a href="index.html" class="logout">🚪 Log Out</a>
+  </nav>
+
+  <div class="menu-footer">TradersCheem © 2026</div>
+</aside>
+
+<main class="container">
+  <h2>Welcome to your Dashboard</h2>
+  <p class="muted">Your virtual demo trading workspace.</p>
+
+  <section class="balance-card">
+    <small>DEMO ACCOUNT BALANCE</small>
+    <div class="balance" id="balance">$100,000.00</div>
+    <span class="account-label">Virtual funds — not real money</span>
+  </section>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Account Type</h3>
+      <p style="color:#60a5fa">DEMO</p>
+    </div>
+    <div class="panel">
+      <h3>Demo Status</h3>
+      <p style="color:#34d399">Active</p>
+    </div>
+  </div>
+
+  <div class="demo-note">
+    This is a demonstration dashboard. The displayed balance is virtual
+    and does not represent money deposited, earned, or available to withdraw.
+  </div>
+
+  <button class="action" onclick="resetDemo()">Reset Demo Balance</button>
+</main>
+
+<script>
+function toggleMenu(){
+  document.getElementById("sideMenu").classList.toggle("open");
+  document.getElementById("menuOverlay").classList.toggle("open");
+}
+
+function resetDemo(){
+  document.getElementById("balance").textContent="$100,000.00";
+}
+</script>
+
+</body>
+</html>
+5;font-size:12px">▼</span></div>
   <div class="p100">100%</div>
 </div>
 
