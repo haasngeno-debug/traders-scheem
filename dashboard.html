@@ -725,12 +725,14 @@ function logoutUser() {
 
 loadTheme();
 loadSidebarUser();
-  function switchTab(button, tab) {
-  document.querySelectorAll('.tabs button').forEach(btn => {
-    btn.classList.remove('on');
-  });
+  
+function switchTab(button, tab) {
+  const buyOptions = document.getElementById('buyOptions');
 
-  button.classList.add('on');
+  if (!buyOptions) {
+    console.error('Could not find buyOptions');
+    return;
+  }
 
   const options = {
     matches: ['Matches', 'Differs'],
@@ -744,19 +746,39 @@ loadSidebarUser();
     over: ['OVER', 'UNDER']
   };
 
-  document.getElementById('buyOptions').innerHTML =
-    options[tab].map((name, i) => `
-      <button class="${i === 0 ? 'even' : 'odd'}"
-        onclick="selectOption('${actions[tab][i]}')">
-        <b>${name}</b>
-        <small>Selected contract</small>
-      </button>
-    `).join('');
+  if (!options[tab]) return;
+
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.classList.remove('on');
+  });
+
+  button.classList.add('on');
+
+  buyOptions.innerHTML = options[tab].map((name, i) => `
+    <button class="${i === 0 ? 'even' : 'odd'}"
+      onclick="selectOption('${actions[tab][i]}', this)">
+      <b>${name}</b>
+      <small>Choose contract</small>
+    </button>
+  `).join('');
+
+  const selected = document.getElementById('selectedContract');
+  if (selected) selected.textContent = 'Choose an option';
 }
 
-function selectOption(option) {
-  alert(option + ' selected');
+function selectOption(option, button) {
+  document.querySelectorAll('#buyOptions button').forEach(btn => {
+    btn.classList.remove('selected');
+  });
+
+  if (button) button.classList.add('selected');
+
+  const selected = document.getElementById('selectedContract');
+  if (selected) {
+    selected.textContent = 'Selected: ' + option;
   }
+}
+</script>
 
 </body>
 </html>
