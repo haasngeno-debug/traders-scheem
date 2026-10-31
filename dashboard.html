@@ -519,7 +519,25 @@ function doDeposit(){
   let v=parseFloat(document.getElementById('depInput').value);
   if(v>0){balances.real+=v; updateBalDisplay(); closeDep();}
 }
-function updPay(){let p=(stake*1.952).toFixed(2); document.getElementById('pe').innerText='$'+p; document.getElementById('po').innerText='$'+p;}
+function updPay() {
+  document.querySelectorAll('#buyOptions button').forEach(button => {
+    const rate = Number(button.dataset.rate);
+    if (!rate) return;
+
+    const values = button.querySelectorAll('.pr b');
+
+    if (values.length >= 2) {
+      values[0].textContent = '$' + Number(stake).toFixed(2);
+      values[1].textContent = '$' + (stake * rate).toFixed(2);
+    }
+  });
+
+  const pe = document.getElementById('pe');
+  const po = document.getElementById('po');
+
+  if (pe) pe.textContent = '$' + (stake * 1.952).toFixed(2);
+  if (po) po.textContent = '$' + (stake * 1.952).toFixed(2);
+  }
 function setChip(v){stake=v; document.getElementById('stake').innerText=stake; document.querySelectorAll('#chips span').forEach(s=>s.classList.toggle('on', parseInt(s.dataset.v)===v)); updPay();}
 function changeStake(d){stake=Math.max(1,stake+d); document.getElementById('stake').innerText=stake; updPay(); document.querySelectorAll('#chips span').forEach(s=>s.classList.remove('on'));}
 function editStake(){let v=prompt('Enter Stake $', stake); if(v){stake=parseInt(v); document.getElementById('stake').innerText=stake; updPay();}}
