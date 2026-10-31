@@ -388,7 +388,13 @@ onclick="window.open('https://wa.me/254114622873', '_blank')">
     <button onclick="closeInfo()">Close</button>
   </div>
     </div>
-<div class="tabs"><button>◎ Matches/Differs</button><button class="on">⊞ Even/Odd</button><button>⇅ Over/Under</button></div>
+<div class="tabs">
+  <button class="on" onclick="switchTab(this, 'Matches/Differs')">◎ Matches/Differs</button>
+
+  <button onclick="switchTab(this, 'Even/Odd')">⊞ Even/Odd</button>
+
+  <button onclick="switchTab(this, 'Over/Under')">⇅ Over/Under</button>
+</div>
 
 <div class="vol-row">
   <div class="vol-box"><div style="background:#1A2538;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#3B82F6">📊</div><div><b>Vol 10 (1s)</b><small><span id="volPrice">9362.02</span> <small style="color:#ef4444">-1.45%</small></small></div><span style="color:#5B6B85;font-size:12px">▼</span></div>
@@ -709,6 +715,15 @@ function logoutUser() {
 
 loadTheme();
 loadSidebarUser();
+  function switchTab(button, tabName) {
+  document.querySelectorAll('.tabs button').forEach(btn => {
+    btn.classList.remove('on');
+  });
+
+  button.classList.add('on');
+
+  console.log('Selected tab:', tabName);
+  }
 </script>
 
 </body>
