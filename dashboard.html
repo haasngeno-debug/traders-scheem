@@ -389,11 +389,9 @@ onclick="window.open('https://wa.me/254114622873', '_blank')">
   </div>
     </div>
 <div class="tabs">
-  <button class="on" onclick="switchTab(this, 'Matches/Differs')">◎ Matches/Differs</button>
-
-  <button onclick="switchTab(this, 'Even/Odd')">⊞ Even/Odd</button>
-
-  <button onclick="switchTab(this, 'Over/Under')">⇅ Over/Under</button>
+  <button class="on" onclick="switchTab(this,'matches')">Matches/Differs</button>
+  <button onclick="switchTab(this,'even')">Even/Odd</button>
+  <button onclick="switchTab(this,'over')">Over/Under</button>
 </div>
 
 <div class="vol-row">
@@ -727,21 +725,25 @@ loadSidebarUser();
     over: ['Over', 'Under']
   };
 
-  const colors = ['even', 'odd'];
+  const actions = {
+    matches: ['MATCHES', 'DIFFERS'],
+    even: ['EVEN', 'ODD'],
+    over: ['OVER', 'UNDER']
+  };
 
   document.getElementById('buyOptions').innerHTML =
-    options[tab].map((name, index) => `
-      <button class="${colors[index]}" onclick="selectOption('${name.toUpperCase()}')">
+    options[tab].map((name, i) => `
+      <button class="${i === 0 ? 'even' : 'odd'}"
+        onclick="selectOption('${actions[tab][i]}')">
         <b>${name}</b>
-        <small>Demo option</small>
+        <small>Selected contract</small>
       </button>
     `).join('');
 }
 
 function selectOption(option) {
-  alert(option + ' selected. Demo interface only.');
+  alert(option + ' selected');
   }
-</script>
 
 </body>
 </html>
