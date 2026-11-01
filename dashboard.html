@@ -132,99 +132,90 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
   </div>
 </div>
 <!-- SIDE MENU OVERLAY -->
-<div class="side-overlay" id="sideOverlay" onclick="toggleMenu()"></div>
+<div id="sideOverlay" onclick="toggleMenu()" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(4px); display:none; z-index:999;"></div>
 
 <!-- SIDE MENU DRAWER -->
-<aside class="side-menu" id="sideMenu">  
-  
-  <!-- HEADER -->
-  <div class="green-menu-header">  
-    <div class="green-menu-title">Menu</div>  
-    <div class="green-menu-header-right">  
-      <span class="green-language">EN</span>  
-      <button type="button" class="green-close-btn" onclick="toggleMenu()">×</button>  
-    </div>  
-  </div>  
+<aside id="sideMenu" style="position:fixed; top:0; left:-320px; width:300px; height:100%; background:#050c18; border-right:1px solid #1e293b; box-shadow:5px 0 25px rgba(0,0,0,0.5); transition:left 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index:1000; padding:16px; overflow-y:auto; box-sizing:border-box;">
 
-  <!-- USER PROFILE -->  
-  <div class="menu-profile">  
-    <div class="menu-avatar" id="menuAvatar">U</div>  
-    <div class="green-profile-info">  
-      <b id="menuName">My Account</b>  
-      <small id="menuEmail">Loading...</small>  
-    </div>  
-  </div>  
+  <!-- MENU HEADER -->
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+    <div style="font-size:16px; font-weight:700; color:#fff;">Menu</div>
+    <div style="display:flex; align-items:center; gap:12px">
+      <span style="font-size:12px; background:#1C2538; border:1px solid #1e293b; padding:3px 6px; border-radius:4px; color:#94a3b8;">EN</span>
+      <button onclick="toggleMenu()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">×</button>
+    </div>
+  </div>
 
-  <!-- MAIN NAVIGATION -->  
-  <div class="green-main-navigation">  
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('deposit')">  
-      <span>💳 Deposit</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('withdraw')">  
-      <span>💸 Withdraw</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('history')">  
-      <span>📊 Trading History</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('positions')">  
-      <span>🕒 Open Positions</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('settings')">  
-      <span>⚙️ Account Settings</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-  </div>  
+  <!-- DYNAMIC USER PROFILE -->
+  <div style="display:flex; align-items:center; gap:12px; background:#091629; border:1px solid #1e293b; padding:12px; border-radius:12px; margin-bottom:12px;">
+    <div id="menuAvatar" style="width:42px; height:42px; background:#3B82F6; color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:18px; flex-shrink:0;">U</div>
+    <div style="display:flex; flex-direction:column; overflow:hidden;">
+      <b id="menuName" style="font-size:14px; color:#fff; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">My Account</b>
+      <small id="menuEmail" style="font-size:11px; color:#94a3b8; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; margin-top:2px;">Loading account...</small>
+    </div>
+  </div>
 
-  <!-- REFER AND EARN -->  
-  <div class="green-refer-card" onclick="handleSidebarAction('refer')">  
-    <div class="green-refer-content">  
-      <div class="green-gift-icon">🎁</div>  
-      <div class="green-refer-text">  
-        <h3>Refer & Earn</h3>  
-        <p>Invite friends and earn rewards via WhatsApp.</p>  
-      </div>  
-    </div>  
-    <button type="button" class="invite-button" onclick="event.stopPropagation(); handleSidebarAction('refer')">  
-      INVITE FRIENDS →  
-    </button>  
-  </div>  
+  <!-- MAIN NAVIGATION -->
+  <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+    <button onclick="handleSidebarAction('deposit')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>💳 Deposit</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('withdraw')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>💸 Withdraw</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('history')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>📊 Trading History</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('positions')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>🕒 Open Positions</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('settings')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>⚙️ Account Settings</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+  </div>
 
-  <!-- BOTTOM NAVIGATION -->  
-  <div class="green-bottom-navigation">  
-    <!-- DARK THEME TOGGLE -->  
-    <div class="green-bottom-item">  
-      <span>🌙 Dark Theme</span>  
-      <label style="position:relative; display:inline-block; width:34px; height:20px;">  
-        <input type="checkbox" id="sidebarThemeToggle" checked style="opacity:0; width:0; height:0;">  
-        <span style="position:absolute; cursor:pointer; inset:0; background-color:#00ff66; border-radius:20px;"></span>  
-      </label>  
-    </div>  
-    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('help')">  
-      <span>❓ Help Centre</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('chat')">  
-      <span>💬 Live Chat</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-    <button type="button" class="green-bottom-item logout-item" onclick="handleSidebarAction('logout')">  
-      <span>🚪 Log Out</span>  
-      <span class="green-arrow">›</span>  
-    </button>  
-  </div>  
+  <!-- REFER AND EARN -->
+  <div onclick="handleSidebarAction('refer')" style="background:#091629; border:1px solid #1e293b; border-radius:14px; padding:14px; margin-bottom:12px; cursor:pointer;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+      <div style="font-size:24px;">🎁</div>
+      <div>
+        <h3 style="font-size:13px; color:#fff; margin:0 0 2px 0;">Refer & Earn</h3>
+        <p style="font-size:11px; color:#94a3b8; margin:0; line-height:1.3;">Invite friends and earn rewards via WhatsApp.</p>
+      </div>
+    </div>
+    <button onclick="event.stopPropagation(); handleSidebarAction('refer')" style="width:100%; background:#2563eb; border:none; border-radius:8px; padding:10px; color:#fff; font-size:12px; font-weight:800; cursor:pointer;">
+      INVITE FRIENDS →
+    </button>
+  </div>
 
-  <!-- FOOTER -->  
-  <div class="green-sidebar-footer">  
-    <p>Traders Scheem v1.0.0</p>  
-  </div>  
+  <!-- BOTTOM MENU -->
+  <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+    <!-- DARK THEME -->
+    <div style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; box-sizing:border-box;">
+      <span>🌙 Dark Theme</span>
+      <label style="position:relative; display:inline-block; width:34px; height:20px;">
+        <input type="checkbox" id="sidebarThemeToggle" checked style="opacity:0; width:0; height:0;">
+        <span style="position:absolute; cursor:pointer; inset:0; background-color:#3b82f6; border-radius:20px;"></span>
+      </label>
+    </div>
+
+    <button onclick="handleSidebarAction('help')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>❓ Help Centre</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('chat')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid #1e293b; color:#fff; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span>💬 Live Chat</span><span style="color:#94a3b8; font-size:16px;">›</span>
+    </button>
+    <button onclick="handleSidebarAction('logout')" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:#091629; border:1px solid rgba(255,77,77,0.3); color:#ff4d4d; padding:12px 14px; border-radius:12px; font-size:13px; font-weight:600; cursor:pointer; text-align:left; box-sizing:border-box;">
+      <span style="color:#ff4d4d;">🚪 Log Out</span><span style="color:#ff4d4d; font-size:16px;">›</span>
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; font-size:11px; color:#64748b; margin-top:16px; padding-top:12px; border-top:1px solid #1e293b;">
+    <p style="margin:0;">Traders Scheem v1.0.0</p>
+  </div>
 
 </aside>
-
-
 
 
 
