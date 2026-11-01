@@ -128,6 +128,7 @@ input:focus {
   color: #38d5f4;
   cursor: pointer;
   padding: 6px;
+  font-weight: 600;
 }
 
 .hint {
@@ -243,8 +244,6 @@ footer {
   © 2026 Traders Scheem. All rights reserved.
 </footer>
 
-
-
 <script>
 (function () {
   const form = document.getElementById("signupForm");
@@ -254,7 +253,7 @@ footer {
 
   const API_URL = "https://traderscheem-backend-pkn6.onrender.com";
 
-  // Show or hide passwords
+  // Toggle Show / Hide Password Functionality
   document.querySelectorAll(".toggle").forEach(function (button) {
     button.addEventListener("click", function () {
       const input = document.getElementById(button.dataset.target);
@@ -326,16 +325,7 @@ footer {
         );
       }
 
-      // Save profile details locally
-      const userData = {
-        fullName: fullName,
-        email: email,
-        phone: phone
-      };
-
-      localStorage.setItem("hassanfx_user", JSON.stringify(userData));
-
-      // Save dashboard profile details
+      // Save profile details locally so the dashboard side menu picks them up
       localStorage.setItem("userName", fullName);
       localStorage.setItem("userEmail", email);
       localStorage.setItem("loggedInUser", fullName);
