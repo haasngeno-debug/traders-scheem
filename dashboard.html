@@ -29,6 +29,24 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 .acc-opt.on{background:#1E2F4A}
 .reset-btn{margin:8px;background:#1C2538;border:1px solid #243044;border-radius:8px;padding:8px;text-align:center;font-size:11px;color:#94a3b8;cursor:pointer}
 .reset-btn:hover{color:#fff;border-color:#3B82F6}
+
+/* Slide-out Side Menu Drawer Styles */
+.side-menu{position:fixed;top:0;left:-320px;width:280px;height:100%;background:#14161f;color:#ffffff;transition:left 0.3s ease-in-out;z-index:9999;box-shadow:4px 0 15px rgba(0,0,0,0.6);display:flex;flex-direction:column;padding:20px;box-sizing:border-box;overflow-y:auto}
+.side-menu.open{left:0}
+.menu-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.menu-header h3{margin:0;font-size:18px}
+.close-btn{background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+.menu-user-profile{display:flex;align-items:center;gap:12px;background:#1e222d;padding:12px;border-radius:8px;margin-bottom:20px}
+.avatar-circle{width:40px;height:40px;background:#3B82F6;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px}
+.user-details{display:flex;flex-direction:column;overflow:hidden}
+.user-details b{font-size:14px;color:#ffffff}
+.user-details small{font-size:11px;color:#9ca3af;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}
+.menu-items{display:flex;flex-direction:column;gap:6px}
+.menu-items a{color:#d1d5db;text-decoration:none;padding:10px 12px;border-radius:6px;font-size:14px;transition:background 0.2s}
+.menu-items a:hover{background:#1f2937;color:#ffffff}
+.menu-divider{height:1px;background:#2d3748;margin:10px 0}
+.logout-link{color:#ef4444 !important}
+
 .tabs{height:50px;display:flex;align-items:center;gap:8px;padding:0 10px;background:#0A101E;border-bottom:1px solid #121A2B;overflow-x:auto}
 .tabs button{border:none;background:#121A2B;color:#5B6B85;font-size:13px;font-weight:600;padding:9px 14px;border-radius:20px;white-space:nowrap;cursor:pointer}
 .tabs .on{background:#1C2538;color:#fff;border:1px solid #2A3650}
@@ -90,9 +108,10 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 
 <div class="top">
   <div class="top-l">
-  <button class="ham" type="button" onclick="toggleMenu()" aria-label="Open menu">☰</button>
-  <div class="t">T</div>
-  <button class="dep-left" onclick="openDep()">Deposit</button>
+    <!-- Three dots / Hamburger menu trigger with onclick event -->
+    <div class="ham" onclick="toggleMenu()" title="Open Menu"></div>
+    <div class="t">T</div>
+    <button class="dep-left" onclick="openDep()">Deposit</button>
   </div>
   <div class="bal-wrap">
     <div class="rbal" id="balBtn" onclick="toggleBal()"><div class="r demo" id="balIcon">D</div><b id="balText" style="color:#FF4D5A">$ 10,000</b><span style="font-size:10px;color:#5B6B85">▼</span></div>
@@ -105,6 +124,38 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
       </div>
       <div class="reset-btn" onclick="resetDemo()">🔄 Reset Demo Balance to $10,000</div>
     </div>
+  </div>
+</div>
+
+<!-- Slide-out Navigation Drawer Component -->
+<div id="sideMenu" class="side-menu">
+  <div class="menu-header">
+    <h3>Menu</h3>
+    <button onclick="toggleMenu()" class="close-btn">&times;</button>
+  </div>
+
+  <!-- Dynamic User Profile showing user's email -->
+  <div class="menu-user-profile">
+    <div class="avatar-circle" id="userInitial">H</div>
+    <div class="user-details">
+      <b id="userNameDisplay">hassanngeno</b>
+      <small id="userEmailDisplay">hassanngeno@gmail.com</small>
+    </div>
+  </div>
+
+  <div class="menu-items">
+    <a href="#" onclick="alert('Account settings clicked')">⚙️ Account settings</a>
+    <a href="#" onclick="openDep()">💰 Deposit</a>
+    <a href="#" onclick="alert('Withdraw clicked')">⬆️ Withdraw</a>
+    <a href="#" onclick="alert('History clicked')">🕒 History</a>
+    <a href="#" onclick="alert('Refer & Earn clicked')">🎁 Refer & Earn</a>
+    
+    <div class="menu-divider"></div>
+    
+    <a href="#" onclick="alert('Help Centre clicked')">❓ Help Centre</a>
+    <a href="#" onclick="alert('Responsible Trading clicked')">🛡️ Responsible Trading</a>
+    <a href="#" onclick="alert('Live Chat clicked')">💬 Live Chat</a>
+    <a href="#" onclick="logout()" class="logout-link">🚪 Log out</a>
   </div>
 </div>
 
@@ -183,6 +234,36 @@ function renderDigits(){
 function tick(){let ch=(Math.random()-0.5)*3; let last=pts[pts.length-1]+ch; pts.push(last); if(pts.length>250) pts.shift(); lastD=Math.abs(Math.floor(last))%10; renderDigits(); draw();}
 setInterval(tick,800);
 
+// Menu Toggle Functionality
+function toggleMenu(){
+  const menu = document.getElementById('sideMenu');
+  if(menu){
+    menu.classList.toggle('open');
+  }
+}
+
+// Load and display signed-up user email and username
+function loadUserData(){
+  const userEmail = localStorage.getItem('userEmail') || 'hassanngeno@gmail.com';
+  const userName = localStorage.getItem('userName') || userEmail.split('@')[0];
+
+  const emailElem = document.getElementById('userEmailDisplay');
+  const nameElem = document.getElementById('userNameDisplay');
+  const initialElem = document.getElementById('userInitial');
+
+  if(emailElem) emailElem.innerText = userEmail;
+  if(nameElem) nameElem.innerText = userName;
+  if(initialElem && userName){
+    initialElem.innerText = userName.charAt(0).toUpperCase();
+  }
+}
+
+function logout(){
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('userName');
+  alert('Logged out successfully.');
+}
+
 function toggleBal(){document.getElementById('balDrop').classList.toggle('open');}
 function switchAcc(m){
   mode=m;
@@ -241,51 +322,13 @@ function doTrade(dir){
   if(autoMode && total<100){setTimeout(()=>doTrade(Math.random()>0.5?'EVEN':'ODD'),1500);}
 }
 function pickDigit(i){lastD=i; renderDigits();}
-renderDigits(); draw(); updPay(); updateBalDisplay();
+
+// Initialize on page load
+renderDigits(); draw(); updPay(); updateBalDisplay(); loadUserData();
+
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
-  <!-- MENU TRIGGER BUTTON -->
-<button onclick="toggleMenu()" class="menu-toggle-btn" aria-label="Open Menu">
-  <svg width="24" height="24" viewBox="0 0 24 24"
-       fill="none" stroke="currentColor" stroke-width="2">
-    <path d="M3 12h18M3 6h18M3 18h18"></path>
-  </svg>
-</button>
-
-<!-- SIDE MENU -->
-<div id="menuOverlay" class="menu-overlay" onclick="toggleMenu()"></div>
-
-<div id="sideMenu" class="side-menu">
-  <div class="menu-header">
-    <h3>Menu</h3>
-    <button onclick="toggleMenu()" class="close-btn">&times;</button>
-  </div>
-
-  <div class="menu-user-profile">
-    <div class="avatar-circle" id="userInitial">H</div>
-    <div class="user-details">
-      <b id="userNameDisplay">Hassan</b>
-      <small id="userEmailDisplay">Your account</small>
-    </div>
-  </div>
-
-  <div class="menu-items">
-    <a href="dashboard.html">🏠 Dashboard</a>
-    <a href="settings.html">⚙️ Account settings</a>
-    <a href="#" onclick="openDep(); toggleMenu(); return false;">💰 Deposit</a>
-    <a href="withdraw.html">⬆️ Withdraw</a>
-    <a href="history.html">🕒 Trade History</a>
-    <a href="refer.html">🎁 Refer &amp; Earn</a>
-
-    <div class="menu-divider"></div>
-
-    <a href="help.html">❓ Help Centre</a>
-    <a href="responsible-trading.html">🛡️ Responsible Trading</a>
-    <a href="contact.html">💬 Contact Us</a>
-    <a href="index.html" class="logout-link">🚪 Log out</a>
-  </div>
-</div>
 </script>
 </body>
-                                                                                                                                                                                           </html>
+</html>
