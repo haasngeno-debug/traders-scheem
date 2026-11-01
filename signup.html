@@ -336,39 +336,33 @@ footer {
         );
       }
 
-      // Save profile details locally as before.
-      const userData = {
-        fullName: fullName,
-        email: email,
-        phone: phone
-      };
+      // Save profile details locally
+const userData = {
+  fullName: fullName,
+  email: email,
+  phone: phone
+};
 
-      localStorage.setItem(
-        "hassanfx_user",
-        JSON.stringify(userData)
-      );
+localStorage.setItem("hassanfx_user", JSON.stringify(userData));
 
-      password.value = "";
-      confirmPassword.value = "";
+// Save the same details using dashboard keys
+localStorage.setItem("userName", fullName);
+localStorage.setItem("userEmail", email);
 
-      submitButton.textContent = "ACCOUNT READY...";
-      message.style.color = "#f5c94b";
-      message.textContent =
-        "Details saved! Opening the loading screen...";
+localStorage.setItem("loggedInUser", fullName);
+localStorage.setItem("loggedInEmail", email);
 
-      setTimeout(function () {
-        window.location.href = "loading.html";
-      }, 500);
+password.value = "";
+confirmPassword.value = "";
 
-    } catch (error) {
-      message.style.color = "#ff8b8b";
-      message.textContent = error.message;
+submitButton.textContent = "ACCOUNT READY...";
+message.style.color = "#f5c94b";
+message.textContent =
+  "Details saved! Opening the loading screen...";
 
-      submitButton.disabled = false;
-      submitButton.textContent = "CONTINUE →";
-    }
-  });
-})();
+setTimeout(function () {
+  window.location.href = "loading.html";
+}, 500);
 </script>  
 
 </body>
