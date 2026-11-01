@@ -400,10 +400,15 @@ function doTrade(dir){
   if(autoMode && total<100){setTimeout(()=>doTrade(Math.random()>0.5?'EVEN':'ODD'),1500);}
 }
 function pickDigit(i){lastD=i; renderDigits();}
+
 function handleSidebarAction(action) {
   if (action === 'deposit') {
     toggleMenu();
-    openDep();
+    if (typeof openDep === 'function') {
+      openDep();
+    } else {
+      window.location.href = 'deposit.html';
+    }
   } else if (action === 'withdraw') {
     window.location.href = 'withdraw.html';
   } else if (action === 'history') {
@@ -427,14 +432,18 @@ function handleSidebarAction(action) {
     localStorage.removeItem('loggedInUser');
     window.location.href = 'login.html';
   }
-  }
-  
+}
+
 // Initialize on page load
-renderDigits(); draw(); updPay(); updateBalDisplay(); loadUserData();
+renderDigits(); 
+draw(); 
+updPay(); 
+updateBalDisplay(); 
+loadUserData();
 
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
 </script>
 </body>
-</html>) 
+</html>
