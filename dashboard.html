@@ -127,37 +127,81 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
   </div>
 </div>
 
-<!-- Slide-out Navigation Drawer Component -->
-<div id="sideMenu" class="side-menu">
-  <div class="menu-header">
-    <h3>Menu</h3>
-    <button onclick="toggleMenu()" class="close-btn">&times;</button>
-  </div>
+<!-- SIDE MENU -->
+<div class="side-overlay" id="sideOverlay"
+ onclick="toggleSideMenu()"></div>
 
-  <!-- Dynamic User Profile showing user's email -->
-  <div class="menu-user-profile">
-    <div class="avatar-circle" id="userInitial">H</div>
-    <div class="user-details">
-      <b id="userNameDisplay">hassanngeno</b>
-      <small id="userEmailDisplay">hassanngeno@gmail.com</small>
-    </div>
-  </div>
+<aside class="side-menu" id="sideMenu">
 
-  <div class="menu-items">
-    <a href="#" onclick="alert('Account settings clicked')">⚙️ Account settings</a>
-    <a href="#" onclick="openDep()">💰 Deposit</a>
-    <a href="#" onclick="alert('Withdraw clicked')">⬆️ Withdraw</a>
-    <a href="#" onclick="alert('History clicked')">🕒 History</a>
-    <a href="#" onclick="alert('Refer & Earn clicked')">🎁 Refer & Earn</a>
-    
-    <div class="menu-divider"></div>
-    
-    <a href="#" onclick="alert('Help Centre clicked')">❓ Help Centre</a>
-    <a href="#" onclick="alert('Responsible Trading clicked')">🛡️ Responsible Trading</a>
-    <a href="#" onclick="alert('Live Chat clicked')">💬 Live Chat</a>
-    <a href="#" onclick="logout()" class="logout-link">🚪 Log out</a>
+ <div class="menu-top">
+  <div class="menu-heading">Menu</div>
+  <div style="display:flex;align-items:center;gap:12px">
+   <span class="menu-language">EN</span>
+   <button class="menu-close" onclick="toggleSideMenu()">×</button>
   </div>
-</div>
+ </div>
+
+ <div class="menu-profile">
+  <div class="menu-avatar" id="menuAvatar">U</div>
+  <div class="menu-profile-info">
+   <b id="menuName">My Account</b>
+   <small id="menuEmail">Loading account...</small>
+  </div>
+ </div>
+
+ <div class="menu-brand">TRADERSSCHEEEM.COM</div>
+
+ <div class="menu-item" onclick="menuAction('settings')">
+  <span class="menu-icon">⚙️</span> Account Settings
+ </div>
+
+ <div class="menu-item" onclick="toggleSideMenu();openDep()">
+  <span class="menu-icon">💳</span> Deposit
+ </div>
+
+ <div class="menu-item" onclick="menuAction('withdraw')">
+  <span class="menu-icon">💸</span> Withdraw
+ </div>
+
+ <div class="menu-item" onclick="menuAction('history')">
+  <span class="menu-icon">📊</span> Trading History
+ </div>
+
+ <div class="menu-item" onclick="menuAction('refer')">
+  <span class="menu-icon">🎁</span> Refer & Earn
+ </div>
+
+ <div class="menu-divider"></div>
+
+ <div class="menu-item" onclick="toggleMenuTheme()">
+  <span class="menu-icon">🌙</span> Dark Theme
+  <span style="margin-left:auto;color:#10B981">●</span>
+ </div>
+
+ <div class="menu-item" onclick="menuAction('help')">
+  <span class="menu-icon">❓</span> Help Centre
+ </div>
+
+ <div class="menu-item" onclick="menuAction('responsible')">
+  <span class="menu-icon">🛡️</span> Responsible Trading
+ </div>
+
+ <div class="menu-item" onclick="menuAction('chat')">
+  <span class="menu-icon">💬</span> Live Chat
+ </div>
+
+ <div class="menu-divider"></div>
+
+ <div class="menu-item menu-logout" onclick="logoutUser()">
+  <span class="menu-icon">🚪</span> Log Out
+ </div>
+
+ <div class="menu-footer">
+  tradersscheeem.com<br>
+   
+ </div>
+
+</aside>
 
 <div class="tabs"><button>◎ Matches/Differs</button><button class="on">⊞ Even/Odd</button><button>⇅ Over/Under</button></div>
 
