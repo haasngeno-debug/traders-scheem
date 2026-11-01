@@ -252,8 +252,7 @@ footer {
   const password = document.getElementById("password");
   const confirmPassword = document.getElementById("confirmPassword");
 
-  const API_URL =
-    "https://traderscheem-backend-pkn6.onrender.com";
+  const API_URL = "https://traderscheem-backend-pkn6.onrender.com";
 
   // Show or hide passwords
   document.querySelectorAll(".toggle").forEach(function (button) {
@@ -269,12 +268,9 @@ footer {
   form.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const fullName =
-      document.getElementById("fullName").value.trim();
-    const email =
-      document.getElementById("email").value.trim().toLowerCase();
-    const phone =
-      document.getElementById("phone").value.trim();
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const phone = document.getElementById("phone").value.trim();
 
     if (!fullName || !email || !phone ||
         !password.value || !confirmPassword.value) {
@@ -285,8 +281,7 @@ footer {
 
     if (password.value.length < 4) {
       message.style.color = "#ff8b8b";
-      message.textContent =
-        "Your password must be at least 4 characters.";
+      message.textContent = "Your password must be at least 4 characters.";
       return;
     }
 
@@ -297,29 +292,24 @@ footer {
       return;
     }
 
-    const submitButton = form.querySelector(
-      'button[type="submit"]'
-    );
+    const submitButton = form.querySelector('button[type="submit"]');
 
     submitButton.disabled = true;
     submitButton.textContent = "SAVING DETAILS...";
 
     try {
-      const response = await fetch(
-        API_URL + "/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            fullName: fullName,
-            email: email,
-            phone: phone,
-            password: password.value
-          })
-        }
-      );
+      const response = await fetch(API_URL + "/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fullName: fullName,
+          email: email,
+          phone: phone,
+          password: password.value
+        })
+      });
 
       const responseText = await response.text();
       let data;
@@ -337,33 +327,40 @@ footer {
       }
 
       // Save profile details locally
-const userData = {
-  fullName: fullName,
-  email: email,
-  phone: phone
-};
+      const userData = {
+        fullName: fullName,
+        email: email,
+        phone: phone
+      };
 
-localStorage.setItem("hassanfx_user", JSON.stringify(userData));
+      localStorage.setItem("hassanfx_user", JSON.stringify(userData));
 
-// Save the same details using dashboard keys
-localStorage.setItem("userName", fullName);
-localStorage.setItem("userEmail", email);
+      // Save dashboard profile details
+      localStorage.setItem("userName", fullName);
+      localStorage.setItem("userEmail", email);
+      localStorage.setItem("loggedInUser", fullName);
+      localStorage.setItem("loggedInEmail", email);
 
-localStorage.setItem("loggedInUser", fullName);
-localStorage.setItem("loggedInEmail", email);
+      password.value = "";
+      confirmPassword.value = "";
 
-password.value = "";
-confirmPassword.value = "";
+      submitButton.textContent = "ACCOUNT READY...";
+      message.style.color = "#f5c94b";
+      message.textContent = "Details saved! Opening the loading screen...";
 
-submitButton.textContent = "ACCOUNT READY...";
-message.style.color = "#f5c94b";
-message.textContent =
-  "Details saved! Opening the loading screen...";
+      setTimeout(function () {
+        window.location.href = "loading.html";
+      }, 500);
 
-setTimeout(function () {
-  window.location.href = "loading.html";
-}, 500);
-</script>  
+    } catch (error) {
+      message.style.color = "#ff8b8b";
+      message.textContent = error.message;
 
+      submitButton.disabled = false;
+      submitButton.textContent = "CONTINUE →";
+    }
+  });
+})();
+</script>
 </body>
 </html>
