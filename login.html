@@ -191,8 +191,10 @@ form.addEventListener("submit", function(event) {
   const userName = email.split("@")[0];
 
   localStorage.setItem("userEmail", email);
-  localStorage.setItem("userName", userName);
+localStorage.setItem("userName", userName);
 
+localStorage.setItem("loggedInEmail", email);
+localStorage.setItem("loggedInUser", userName);
   message.textContent = "Opening demo dashboard...";
   message.style.color = "#00d9a0";
 
