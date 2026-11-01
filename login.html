@@ -188,13 +188,19 @@ form.addEventListener("submit", function(event) {
   event.preventDefault();
 
   const email = document.getElementById("email").value.trim();
+
+  if (!email) {
+    message.textContent = "Please enter your email.";
+    return;
+  }
+
   const userName = email.split("@")[0];
 
   localStorage.setItem("userEmail", email);
-localStorage.setItem("userName", userName);
+  localStorage.setItem("userName", userName);
+  localStorage.setItem("loggedInEmail", email);
+  localStorage.setItem("loggedInUser", userName);
 
-localStorage.setItem("loggedInEmail", email);
-localStorage.setItem("loggedInUser", userName);
   message.textContent = "Opening demo dashboard...";
   message.style.color = "#00d9a0";
 
