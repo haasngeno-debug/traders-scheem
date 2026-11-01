@@ -314,205 +314,17 @@ function loadUserData(){
     if(initialElem) initialElem.innerText = 'G';
   }
 
-  if(userName){
+ if(userName){
     if(nameElem) nameElem.innerText = userName;
-    if(initialElem) initialElem.innerText = userName.charAt(0).toUpenu()" title="Open Menu"></div>
-    <div class="t">T</div>
-    <button class="dep-left" onclick="openDep()">Deposit</button>
-  </div>
-  <div class="bal-wrap">
-    <div class="rbal" id="balBtn" onclick="toggleBal()"><div class="r demo" id="balIcon">D</div><b id="balText" style="color:#FF4D5A">$ 10,000</b><span style="font-size:10px;color:#5B6B85">▼</span></div>
-    <div class="bal-dropdown" id="balDrop">
-      <div class="acc-opt on" id="demoOpt" onclick="switchAcc('demo')">
-        <div class="left"><div class="circle demo">D</div><div><b>DEMO Account</b><small id="demoBalTxt">$10,000.00</small></div></div><span style="color:#3B82F6">✓</span>
-      </div>
-      <div class="acc-opt" id="realOpt" onclick="switchAcc('real')">
-        <div class="left"><div class="circle real">R</div><div><b>REAL Account</b><small id="realBalTxt">$0.00</small></div></div><span></span>
-      </div>
-      <div class="reset-btn" onclick="resetDemo()">🔄 Reset Demo Balance to $10,000</div>
-    </div>
-  </div>
-</div>
-
-<!-- SIDE MENU -->
-<div class="side-overlay" id="sideOverlay"
- onclick="toggleSideMenu()"></div>
-
-<aside class="side-menu" id="sideMenu">
-
- <div class="menu-top">
-  <div class="menu-heading">Menu</div>
-  <div style="display:flex;align-items:center;gap:12px">
-   <span class="menu-language">EN</span>
-   <button class="menu-close" onclick="toggleSideMenu()">×</button>
-  </div>
- </div>
-
- <div class="menu-profile">
-  <div class="menu-avatar" id="menuAvatar">U</div>
-  <div class="menu-profile-info">
-   <b id="menuName">My Account</b>
-   <small id="menuEmail">Loading account...</small>
-  </div>
- </div>
-
- <div class="menu-brand">TRADERSSCHEEEM.COM</div>
-
- <div class="menu-item" onclick="menuAction('settings')">
-  <span class="menu-icon">⚙️</span> Account Settings
- </div>
-
- <div class="menu-item" onclick="toggleSideMenu();openDep()">
-  <span class="menu-icon">💳</span> Deposit
- </div>
-
- <div class="menu-item" onclick="menuAction('withdraw')">
-  <span class="menu-icon">💸</span> Withdraw
- </div>
-
- <div class="menu-item" onclick="menuAction('history')">
-  <span class="menu-icon">📊</span> Trading History
- </div>
-
- <div class="menu-item" onclick="menuAction('refer')">
-  <span class="menu-icon">🎁</span> Refer & Earn
- </div>
-
- <div class="menu-divider"></div>
-
- <div class="menu-item" onclick="toggleMenuTheme()">
-  <span class="menu-icon">🌙</span> Dark Theme
-  <span style="margin-left:auto;color:#10B981">●</span>
- </div>
-
- <div class="menu-item" onclick="menuAction('help')">
-  <span class="menu-icon">❓</span> Help Centre
- </div>
-
- <div class="menu-item" onclick="menuAction('responsible')">
-  <span class="menu-icon">🛡️</span> Responsible Trading
- </div>
-
- <div class="menu-item" onclick="menuAction('chat')">
-  <span class="menu-icon">💬</span> Live Chat
- </div>
-
- <div class="menu-divider"></div>
-
- <div class="menu-item menu-logout" onclick="logoutUser()">
-  <span class="menu-icon">🚪</span> Log Out
- </div>
-
- <div class="menu-footer">
-  tradersscheeem.com<br>
-   
- </div>
-
-</aside>
-
-<div class="tabs"><button>◎ Matches/Differs</button><button class="on">⊞ Even/Odd</button><button>⇅ Over/Under</button></div>
-
-<div class="vol-row">
-  <div class="vol-box"><div style="background:#1A2538;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#3B82F6">📊</div><div><b>Vol 10 (1s)</b><small><span id="volPrice">9362.02</span> <small style="color:#ef4444">-1.45%</small></small></div><span style="color:#5B6B85;font-size:12px">▼</span></div>
-  <div class="p100">100%</div>
-</div>
-
-<div class="chart">
-  <canvas id="cv"></canvas>
-  <div class="price-scale"><span>9363.98</span><span>9356.82</span><span>9349.65</span><span>9342.48</span><span>9335.32</span><span>9328.15</span></div>
-  <div class="price-tag" id="ptag">9362.02</div>
-  <div class="time-row"><span>18:39:55</span><span>18:40:09</span><span>18:40:24</span><span>18:40:39</span><span>18:40:53</span></div>
-  <div class="zoom"><button>+</button><button>−</button></div>
-</div>
-
-<div class="digits" id="digits"></div>
-
-<div class="switch"><button class="on" id="autoB" onclick="setMode('AUTO')">AUTO</button><button id="manB" onclick="setMode('MANUAL')">MANUAL</button></div>
-
-<div class="stake-wrap"><button onclick="changeStake(-1)">−</button><div class="stake-mid" onclick="editStake()"><label>STAKE</label><i>$</i><b id="stake">10</b></div><button onclick="changeStake(1)">+</button></div>
-
-<div class="chips" id="chips"><span data-v="1" onclick="setChip(1)">$1</span><span data-v="5" onclick="setChip(5)">$5</span><span class="on" data-v="10" onclick="setChip(10)">$10</span><span data-v="25" onclick="setChip(25)">$25</span><span data-v="50" onclick="setChip(50)">$50</span><span data-v="100" onclick="setChip(100)">$100</span></div>
-
-<div class="boxes">
-  <div class="box green"><label>TARGET PROFIT</label><input value="200"></div>
-  <div class="box red"><label>STOP LOSS</label><input value="999"></div>
-  <div class="box yellow"><label>MULTIPLIER</label><input value="2"></div>
-</div>
-
-<div class="last"><span id="lastInfo">LAST  0T · 0W · 0L [DEMO]</span><b id="profit">+$0.00</b></div>
-
-<div class="buy">
-  <button class="even" onclick="doTrade('EVEN')"><b>Even</b><small>95.2%</small><div class="pr"><b id="pe">$19.52</b><br><small>Payout</small></div></button>
-  <button class="odd" onclick="doTrade('ODD')"><b>Odd</b><small>95.2%</small><div class="pr"><b id="po">$19.52</b><br><small>Payout</small></div></button>
-</div>
-
-<div class="bottom"><div class="on"><div style="font-size:22px">📊</div>Trade</div><div><div style="width:46px;height:46px;background:linear-gradient(135deg,#F59E0B,#EC4899,#8B5CF6);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 2px;color:#fff">✨</div>AI</div><div><div style="font-size:22px">🕒</div>Positions</div></div>
-
-<div class="modal" id="depModal">
-  <div class="modal-box">
-    <h3 id="depTitle">Deposit to REAL Account</h3>
-    <input id="depInput" type="number" placeholder="Enter amount $" value="10">
-    <button onclick="doDeposit()">Deposit</button>
-    <button style="background:transparent;color:#94a3b8;margin-top:8px" onclick="closeDep()">Cancel</button>
-  </div>
-</div>
-
-<script>
-let stake=10, lastD=2, profit=0, total=0, wins=0, losses=0, autoMode=true;
-let balances={demo:10000, real:0}, mode='demo';
-let pts=[], pr=9320;
-const cv=document.getElementById('cv'), ctx=cv.getContext('2d'), ptag=document.getElementById('ptag');
-
-function resize(){cv.width=cv.offsetWidth*2;cv.height=480*2;ctx.scale(2,2);}resize();window.onresize=resize;
-for(let i=0;i<160;i++){let c=Math.sin(i/5)*2 + (Math.random()-0.5)*3; if(i<20) c=4; if(i>100) c=Math.sin(i/3)*3; pr+=c; pts.push(pr);}
-function draw(){
-  ctx.clearRect(0,0,cv.offsetWidth,480);
-  let slice=pts.slice(-110); let min=Math.min(...slice)-8, max=Math.max(...slice)+12, range=max-min;
-  const W=cv.offsetWidth-68, H=430;
-  ctx.strokeStyle='#FFFFFF'; ctx.lineWidth=1.8; ctx.beginPath();
-  slice.forEach((p,i)=>{let x=(i/(slice.length-1))*W; let y=15+H-((p-min)/range)*H*0.85; if(i==0) ctx.moveTo(x,y); else ctx.lineTo(x,y);});
-  ctx.stroke();
-  let last=slice[slice.length-1]; let yL=15+H-((last-min)/range)*H*0.85; ptag.style.top=yL+'px'; ptag.innerText=last.toFixed(2); document.getElementById('volPrice').innerText=last.toFixed(2);
-}
-let perc={0:11.2,1:9.2,2:8.2,3:7.4,4:8.6,5:11.8,6:11.0,7:9.0,8:12.6,9:11.0};
-function renderDigits(){
-  let html='';
-  for(let i=0;i<10;i++){
-    html+=`<div class="di ${i===lastD?'sel':''}" onclick="pickDigit(${i})"><div class="circle ${i===lastD?'sel':''}"><b>${i}</b></div><div class="tri" style="${i===lastD?'display:block':''}"></div><small class="perc">${perc[i].toFixed(1)}%</small></div>`;
-  }
-  document.getElementById('digits').innerHTML=html;
-}
-function tick(){let ch=(Math.random()-0.5)*3; let last=pts[pts.length-1]+ch; pts.push(last); if(pts.length>250) pts.shift(); lastD=Math.abs(Math.floor(last))%10; renderDigits(); draw();}
-setInterval(tick,800);
-
-// Menu Toggle Functionality
-function toggleMenu(){
-  const menu = document.getElementById('sideMenu');
-  if(menu){
-    menu.classList.toggle('open');
+    if(initialElem) initialElem.innerText = userName.charAt(0).toUpperCase();
   }
 }
 
-// Load and display signed-up user email and username
-function loadUserData(){
-  const userEmail = localStorage.getItem('userEmail') || 'hassanngeno@gmail.com';
-  const userName = localStorage.getItem('userName') || userEmail.split('@')[0];
-
-  const emailElem = document.getElementById('userEmailDisplay');
-  const nameElem = document.getElementById('userNameDisplay');
-  const initialElem = document.getElementById('userInitial');
-
-  if(emailElem) emailElem.innerText = userEmail;
-  if(nameElem) nameElem.innerText = userName;
-  if(initialElem && userName){
-    initialElem.innerText = userName.charAt(0).toUpperCase();
-  }
-}
-
-function logout(){
+function logoutUser(){
   localStorage.removeItem('userEmail');
   localStorage.removeItem('userName');
-  alert('Logged out successfully.');
+  localStorage.removeItem('loggedInEmail');
+  localStorage.removeItem('loggedInUser');
 }
 
 function toggleBal(){document.getElementById('balDrop').classList.toggle('open');}
@@ -582,4 +394,4 @@ document.addEventListener('click', (e)=>{
 });
 </script>
 </body>
-</html>
+</html>) 
