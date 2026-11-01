@@ -136,62 +136,64 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 
 <!-- SIDE MENU DRAWER -->
 <aside class="side-menu" id="sideMenu">  
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">  
-    <div style="font-size:16px; font-weight:700; color:#fff;">Menu</div>  
-    <div style="display:flex; align-items:center; gap:12px">  
-      <span style="font-size:12px; background:#091629; border:1px solid #00ff66; padding:3px 6px; border-radius:4px; color:#00ff66;">EN</span>  
-      <button onclick="toggleMenu()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">×</button>  
+  
+  <!-- HEADER -->
+  <div class="green-menu-header">  
+    <div class="green-menu-title">Menu</div>  
+    <div class="green-menu-header-right">  
+      <span class="green-language">EN</span>  
+      <button type="button" class="green-close-btn" onclick="toggleMenu()">×</button>  
     </div>  
-  </div>
+  </div>  
 
-  <!-- Dynamic User Profile -->  
+  <!-- USER PROFILE -->  
   <div class="menu-profile">  
     <div class="menu-avatar" id="menuAvatar">U</div>  
-    <div style="display:flex; flex-direction:column; overflow:hidden;">  
-      <b id="menuName" style="font-size:13px; color:#fff; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">My Account</b>  
-      <small id="menuEmail" style="font-size:11px; color:#9ca3af; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; margin-top:2px;">Loading...</small>  
+    <div class="green-profile-info">  
+      <b id="menuName">My Account</b>  
+      <small id="menuEmail">Loading...</small>  
     </div>  
-  </div>
+  </div>  
 
   <!-- MAIN NAVIGATION -->  
   <div class="green-main-navigation">  
-    <button class="green-menu-item" onclick="handleSidebarAction('deposit')">  
+    <button type="button" class="green-menu-item" onclick="handleSidebarAction('deposit')">  
       <span>💳 Deposit</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-menu-item" onclick="handleSidebarAction('withdraw')">  
+    <button type="button" class="green-menu-item" onclick="handleSidebarAction('withdraw')">  
       <span>💸 Withdraw</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-menu-item" onclick="handleSidebarAction('history')">  
+    <button type="button" class="green-menu-item" onclick="handleSidebarAction('history')">  
       <span>📊 Trading History</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-menu-item" onclick="handleSidebarAction('positions')">  
+    <button type="button" class="green-menu-item" onclick="handleSidebarAction('positions')">  
       <span>🕒 Open Positions</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-menu-item" onclick="handleSidebarAction('settings')">  
+    <button type="button" class="green-menu-item" onclick="handleSidebarAction('settings')">  
       <span>⚙️ Account Settings</span>  
-      <span>›</span>  
-    </button>
-  </div>
+      <span class="green-arrow">›</span>  
+    </button>  
+  </div>  
 
   <!-- REFER AND EARN -->  
   <div class="green-refer-card" onclick="handleSidebarAction('refer')">  
-    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">  
-      <div style="font-size:20px;">🎁</div>  
-      <div>  
-        <h3 style="font-size:13px; color:#fff; margin-bottom:2px;">Refer & Earn</h3>  
-        <p style="font-size:11px; color:#9ca3af;">Invite friends and earn rewards via WhatsApp.</p>  
+    <div class="green-refer-content">  
+      <div class="green-gift-icon">🎁</div>  
+      <div class="green-refer-text">  
+        <h3>Refer & Earn</h3>  
+        <p>Invite friends and earn rewards via WhatsApp.</p>  
       </div>  
     </div>  
-    <button class="invite-button" onclick="event.stopPropagation(); handleSidebarAction('refer')">  
+    <button type="button" class="invite-button" onclick="event.stopPropagation(); handleSidebarAction('refer')">  
       INVITE FRIENDS →  
     </button>  
-  </div>
+  </div>  
 
-  <!-- BOTTOM MENU -->  
+  <!-- BOTTOM NAVIGATION -->  
   <div class="green-bottom-navigation">  
     <!-- DARK THEME TOGGLE -->  
     <div class="green-bottom-item">  
@@ -201,25 +203,27 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
         <span style="position:absolute; cursor:pointer; inset:0; background-color:#00ff66; border-radius:20px;"></span>  
       </label>  
     </div>  
-    <button class="green-bottom-item" onclick="handleSidebarAction('help')">  
+    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('help')">  
       <span>❓ Help Centre</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-bottom-item" onclick="handleSidebarAction('chat')">  
+    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('chat')">  
       <span>💬 Live Chat</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-    <button class="green-bottom-item logout-item" onclick="handleSidebarAction('logout')">  
+    <button type="button" class="green-bottom-item logout-item" onclick="handleSidebarAction('logout')">  
       <span>🚪 Log Out</span>  
-      <span>›</span>  
+      <span class="green-arrow">›</span>  
     </button>  
-  </div>
+  </div>  
 
   <!-- FOOTER -->  
-  <div style="text-align:center; font-size:10px; color:#64748b; margin-top:14px;">  
+  <div class="green-sidebar-footer">  
     <p>Traders Scheem v1.0.0</p>  
   </div>  
+
 </aside>
+
 
 
 
