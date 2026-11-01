@@ -110,16 +110,13 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 </style>
 </head>
 <body>
-
 <div class="top">
   <div class="top-l">
-    <!-- Three dots / Hamburger menu trigger with visible character and size -->
-    <div class="ham" onclick="toggleMenu()" title="Open Menu" style="cursor:pointer; font-size:18px; font-weight:bold; color:#fff; display:flex; align-items:center; justify-content:center; width:32px; height:32px; user-select:none;">⋮</div>
+    <!-- Three dots / Hamburger menu trigger -->
+    <div class="ham" onclick="toggleMenu()" title="Open Menu"></div>
     <div class="t">T</div>
     <button class="dep-left" onclick="openDep()">Deposit</button>
   </div>
-</div>
-
   <div class="bal-wrap">
     <div class="rbal" id="balBtn" onclick="toggleBal()"><div class="r demo" id="balIcon">D</div><b id="balText" style="color:#FF4D5A">$ 10,000</b><span style="font-size:10px;color:#5B6B85">▼</span></div>
     <div class="bal-dropdown" id="balDrop">
