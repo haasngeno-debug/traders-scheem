@@ -449,6 +449,34 @@ loadUserData();
 document.addEventListener('click', (e)=>{
   if(!e.target.closest('.bal-wrap')) document.getElementById('balDrop').classList.remove('open');
 });
+  
+function openSidebarNow() {
+  const menu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('sideOverlay');
+
+  if (!menu || !overlay) {
+    alert('ERROR: Sidebar HTML not found!');
+    return;
+  }
+
+  menu.style.setProperty('left', '0px', 'important');
+  overlay.style.setProperty('display', 'block', 'important');
+
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebarNow() {
+  const menu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('sideOverlay');
+
+  if (!menu || !overlay) return;
+
+  menu.style.setProperty('left', '-320px', 'important');
+  overlay.style.setProperty('display', 'none', 'important');
+
+  document.body.style.overflow = '';
+}
+  
 </script>
 </body>
 </html>
