@@ -132,105 +132,81 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
   </div>
 </div>
 
-<!-- SIDE MENU OVERLAY -->
-<div class="side-overlay" id="sideOverlay" onclick="toggleMenu()"></div>
+<!-- SIDE MENU OVERLAY -->  <div class="side-overlay" id="sideOverlay" onclick="toggleMenu()"></div>  <!-- SIDE MENU DRAWER -->  <aside class="side-menu" id="sideMenu">  
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">  
+    <div style="font-size:16px; font-weight:700; color:#fff;">Menu</div>  
+    <div style="display:flex; align-items:center; gap:12px">  
+      <span style="font-size:12px; background:#091629; border:1px solid #00ff66; padding:3px 6px; border-radius:4px; color:#00ff66;">EN</span>  
+      <button onclick="toggleMenu()" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;">×</button>  
+    </div>  
+  </div>    <!-- Dynamic User Profile -->    <div class="menu-profile">  
+    <div class="menu-avatar" id="menuAvatar">U</div>  
+    <div style="display:flex; flex-direction:column; overflow:hidden;">  
+      <b id="menuName" style="font-size:13px; color:#fff; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;">My Account</b>  
+      <small id="menuEmail" style="font-size:11px; color:#9ca3af; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; margin-top:2px;">Loading...</small>  
+    </div>  
+  </div>    <!-- MAIN NAVIGATION -->    <div>  
+    <button class="green-menu-item" onclick="handleSidebarAction('deposit')">  
+      <span>💳 Deposit</span>  
+      <span>›</span>  
+    </button>  <button class="green-menu-item" onclick="handleSidebarAction('withdraw')">  
+  <span>💸 Withdraw</span>  
+  <span>›</span>  
+</button>  
 
-<!-- SIDE MENU DRAWER -->
-<aside class="side-menu" id="sideMenu">
+<button class="green-menu-item" onclick="handleSidebarAction('history')">  
+  <span>📊 Trading History</span>  
+  <span>›</span>  
+</button>  
 
-  <!-- MENU HEADER -->
-  <div class="green-menu-header">
-    <div class="green-menu-title">Menu</div>
-    <div class="green-menu-header-right">
-      <span class="green-language">EN</span>
-      <button type="button" class="green-close-btn" onclick="toggleMenu()">×</button>
-    </div>
-  </div>
+<button class="green-menu-item" onclick="handleSidebarAction('positions')">  
+  <span>🕒 Open Positions</span>  
+  <span>›</span>  
+</button>  
 
-  <!-- DYNAMIC USER PROFILE -->
-  <div class="menu-profile">
-    <div class="menu-avatar" id="menuAvatar">U</div>
-    <div class="green-profile-info">
-      <b id="menuName">My Account</b>
-      <small id="menuEmail">Loading account...</small>
-    </div>
-  </div>
+<button class="green-menu-item" onclick="handleSidebarAction('settings')">  
+  <span>⚙️ Account Settings</span>  
+  <span>›</span>  
+</button>
 
-  <!-- MAIN NAVIGATION -->
-  <div class="green-main-navigation">
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('deposit')">
-      <span>💳 Deposit</span>
-      <span class="green-arrow">›</span>
-    </button>
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('withdraw')">
-      <span>💸 Withdraw</span>
-      <span class="green-arrow">›</span>
-    </button>
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('history')">
-      <span>📊 Trading History</span>
-      <span class="green-arrow">›</span>
-    </button>
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('positions')">
-      <span>🕒 Open Positions</span>
-      <span class="green-arrow">›</span>
-    </button>
-    <button type="button" class="green-menu-item" onclick="handleSidebarAction('settings')">
-      <span>⚙️ Account Settings</span>
-      <span class="green-arrow">›</span>
-    </button>
-  </div>
+  </div>    <!-- REFER AND EARN -->    <div class="green-refer-card" onclick="handleSidebarAction('refer')">  
+    <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">  
+      <div style="font-size:20px;">🎁</div>  
+      <div>  
+        <h3 style="font-size:13px; color:#fff; margin-bottom:2px;">Refer & Earn</h3>  
+        <p style="font-size:11px; color:#9ca3af;">Invite friends and earn rewards via WhatsApp.</p>  
+      </div>  
+    </div>  
+    <button class="invite-button">  
+      INVITE FRIENDS →  
+    </button>  
+  </div>    <!-- BOTTOM MENU -->    <div>  
+    <!-- DARK THEME TOGGLE -->  
+    <div class="green-bottom-item">  
+      <span>🌙 Dark Theme</span>  
+      <label style="position:relative; display:inline-block; width:34px; height:20px;">  
+        <input type="checkbox" id="sidebarThemeToggle" checked style="opacity:0; width:0; height:0;">  
+        <span style="position:absolute; cursor:pointer; inset:0; background-color:#00ff66; border-radius:20px;"></span>  
+      </label>  
+    </div>  <button class="green-bottom-item" onclick="handleSidebarAction('help')">  
+  <span>❓ Help Centre</span>  
+  <span>›</span>  
+</button>  
 
-  <!-- REFER AND EARN -->
-  <div class="green-refer-card" onclick="handleSidebarAction('refer')">
-    <div class="green-refer-content">
-      <div class="green-gift-icon">🎁</div>
-      <div class="green-refer-text">
-        <h3>Refer & Earn</h3>
-        <p>Invite friends and earn rewards via WhatsApp.</p>
-      </div>
-    </div>
-    <button type="button" class="invite-button" onclick="event.stopPropagation(); handleSidebarAction('refer')">
-      INVITE FRIENDS →
-    </button>
-  </div>
+<button class="green-bottom-item" onclick="handleSidebarAction('chat')">  
+  <span>💬 Live Chat</span>  
+  <span>›</span>  
+</button>  
 
-  <!-- BOTTOM MENU -->
-  <div class="green-bottom-navigation">
-    <!-- DARK THEME TOGGLE -->
-    <div class="green-bottom-item green-theme-row">
-      <span>🌙 Dark Theme</span>
-      <label class="green-theme-switch">
-        <input type="checkbox" id="sidebarThemeToggle" checked>
-        <span class="green-theme-slider"></span>
-      </label>
-    </div>
+<button class="green-bottom-item logout-item" onclick="handleSidebarAction('logout')">  
+  <span>🚪 Log Out</span>  
+  <span>›</span>  
+</button>Yeo
 
-    <!-- HELP CENTRE -->
-    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('help')">
-      <span>❓ Help Centre</span>
-      <span class="green-arrow">›</span>
-    </button>
-
-    <!-- LIVE CHAT -->
-    <button type="button" class="green-bottom-item" onclick="handleSidebarAction('chat')">
-      <span>💬 Live Chat</span>
-      <span class="green-arrow">›</span>
-    </button>
-
-    <!-- LOG OUT -->
-    <button type="button" class="green-bottom-item logout-item" onclick="handleSidebarAction('logout')">
-      <span>🚪 Log Out</span>
-      <span>›</span>
-    </button>
-  </div>
-
-  <!-- FOOTER -->
-  <div class="green-sidebar-footer">
-    <p>Traders Scheem v1.0.0</p>
-  </div>
-
-</aside>
-
+  </div>    <!-- FOOTER -->    <div style="text-align:center; font-size:10px; color:#64748b; margin-top:14px;">  
+    <p>Traders Scheem v1.0.0</p>  
+  </div>  
+</aside>  
 
 
 
@@ -443,68 +419,6 @@ function handleSidebarAction(action) {
     window.location.href = 'login.html';
   }
   }
-  // OPEN AND CLOSE SIDEBAR DRAWER
-function toggleMenu() {
-  const menu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('sideOverlay');
-  if (menu && overlay) {
-    menu.classList.toggle('open');
-    overlay.classList.toggle('open');
-  }
-}
-
-// LOAD SIGNED-UP USER DATA INTO SIDEBAR
-function loadUserData() {
-  const name = localStorage.getItem('userName') || localStorage.getItem('loggedInUser') || 'My Account';
-  const email = localStorage.getItem('userEmail') || localStorage.getItem('loggedInEmail') || 'user@tradersscheem.com';
-
-  const nameElem = document.getElementById('menuName');
-  const emailElem = document.getElementById('menuEmail');
-  const avatarElem = document.getElementById('menuAvatar');
-
-  if (nameElem) nameElem.innerText = name;
-  if (emailElem) emailElem.innerText = email;
-  if (avatarElem && name) avatarElem.innerText = name.charAt(0).toUpperCase();
-}
-
-// SIDEBAR ACTION HANDLER
-function handleSidebarAction(action) {
-  if (action === 'deposit') {
-    toggleMenu();
-    if (typeof openDep === 'function') {
-      openDep();
-    } else {
-      window.location.href = 'deposit.html';
-    }
-  } else if (action === 'withdraw') {
-    window.location.href = 'withdraw.html';
-  } else if (action === 'history') {
-    window.location.href = 'history.html';
-  } else if (action === 'positions') {
-    toggleMenu();
-    alert('Open Positions view is active on your dashboard.');
-  } else if (action === 'settings') {
-    window.location.href = 'settings.html';
-  } else if (action === 'refer') {
-    const inviteText = encodeURIComponent("Hey! Join me on Traders Scheem and start trading today: https://haasngeno-debug.github.io/traders-scheem/");
-    window.open(`https://wa.me/?text=${inviteText}`, '_blank');
-  } else if (action === 'help') {
-    window.open('https://wa.me/254114622873?text=Hello,%20I%20need%20help%20with%20Help%20Centre', '_blank');
-  } else if (action === 'chat') {
-    window.open('https://wa.me/254114622873?text=Hello,%20I%20would%20like%20to%20chat%20with%20support', '_blank');
-  } else if (action === 'logout') {
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('loggedInEmail');
-    localStorage.removeItem('loggedInUser');
-    window.location.href = 'login.html';
-  }
-}
-
-// Run user data loading when page loads
-document.addEventListener('DOMContentLoaded', () => {
-  loadUserData();
-});
   
 // Initialize on page load
 renderDigits(); draw(); updPay(); updateBalDisplay(); loadUserData();
