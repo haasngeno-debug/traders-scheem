@@ -113,7 +113,12 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 <div class="top">
   <div class="top-l">
     <!-- Three dots / Hamburger menu trigger -->
-    <div class="ham" onclick="toggleMenu()" title="Open Menu"></div>
+    <button type="button" class="ham"
+  onclick="toggleMenu()"
+  aria-label="Open menu"
+  style="background:none;border:none;color:white;font-size:27px;cursor:pointer;">
+  ☰
+</button>
     <div class="t">T</div>
     <button class="dep-left" onclick="openDep()">Deposit</button>
   </div>
