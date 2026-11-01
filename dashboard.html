@@ -325,7 +325,9 @@ function logoutUser(){
   localStorage.removeItem('userName');
   localStorage.removeItem('loggedInEmail');
   localStorage.removeItem('loggedInUser');
-}
+
+  window.location.href = 'login.html';
+    }
 
 function toggleBal(){document.getElementById('balDrop').classList.toggle('open');}
 function switchAcc(m){
