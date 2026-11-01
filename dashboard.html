@@ -112,8 +112,14 @@ body{background:#0A101E;color:#fff;overflow-x:hidden;padding-bottom:90px}
 <body>
 <div class="top">
   <div class="top-l">
-    <!-- Three dots / Hamburger menu trigger -->
-    <div class="ham" onclick="toggleMenu()" title="Open Menu"></div>
+    <!-- HAMBURGER MENU BUTTON -->
+<button
+  id="menuOpenBtn"
+  type="button"
+  onclick="openSidebarNow()"
+  title="Open Menu"
+  style="background:none;border:none;color:white;font-size:30px;padding:5px;cursor:pointer;">
+  ☰
 </button>
     <div class="t">T</div>
     <button class="dep-left" onclick="openDep()">Deposit</button>
